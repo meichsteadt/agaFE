@@ -1,0 +1,7 @@
+<div class="product">
+  <p class="text-center">{{(product)?.name}}</p>
+  <img class="img-responsive" src="{{(product)?.image}}" alt="">
+</div>
+<div class="product-items">
+  <p *ngFor="let item of productItems">{{item.description}}</p>
+</div>

@@ -1,0 +1,21 @@
+<div class="products row">
+  <div class="product col-lg-4" *ngFor="let product of products" (click)="goToDetail(product)">
+    <img src="{{product['image']}}" alt="" class="img-responsive">
+    <div class="info">
+      <p>{{product["name"]}}</p>
+    </div>
+  </div>
+</div>
+<nav aria-label="Page navigation" class="text-center">
+  <ul class="pagination">
+    <li (click)="previousPage()">
+      <a><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    <li *ngFor="let pagenumber of createRange(pages)" [ngClass]="compare(pagenumber)" (click)="setPage(pagenumber)">
+      <a>{{pagenumber}}</a>
+    </li>
+    <li (click)="nextPage()">
+      <a><span aria-hidden="true">&raquo;</span></a>
+    </li>
+  </ul>
+</nav>

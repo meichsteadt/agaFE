@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  category: string = "bedroom";
+  constructor(private _location: Location, private router: Router) {}
+  goTo(page) {
+
+  }
+
+  goBack() {
+    this._location.back();
+  }
 }
