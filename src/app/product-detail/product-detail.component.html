@@ -1,7 +1,51 @@
-<div class="product">
-  <p class="text-center">{{(product)?.name}}</p>
-  <img class="img-responsive" src="{{(product)?.image}}" alt="">
+<div class="row">
+  <div class="col-lg-6 product-image-wrapper">
+    <img class="product-image img-responsive" src="{{(product)?.image}}" alt="">
+  </div>
+  <div class="col-lg-6 product-info">
+    <h1>{{(product)?.name}}</h1>
+    <h3>Product Number: {{(product)?.number}}</h3>
+    <p class="product-description">{{(product)?.description}}</p>
+    <hr>
+    <div class="col-lg-12 item-pick">
+      <h2 class="text-center">Pick Your Items</h2>
+      <table>
+        <tr>
+          <th>Item Description</th>
+          <th>Dimensions</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let item of productItems">
+          <td>{{item.description}}</td>
+          <td>{{item.dimensions}}</td>
+          <td>{{item.price | currency:'USD':true}}</td>
+          <td class="input-field">
+            <li class="active" (click)="dropDown($event)">{{item.numberSelected}}</li>
+            <ul>
+              <li value="0" (click)="selectNumber($event, item)">0</li>
+              <li value="1" (click)="selectNumber($event, item)">1</li>
+              <li value="2" (click)="selectNumber($event, item)">2</li>
+              <li value="3" (click)="selectNumber($event, item)">3</li>
+              <li value="4" (click)="selectNumber($event, item)">4</li>
+              <li value="5" (click)="selectNumber($event, item)">5</li>
+              <li value="6" (click)="selectNumber($event, item)">6</li>
+              <li value="7" (click)="selectNumber($event, item)">7</li>
+              <li value="8" (click)="selectNumber($event, item)">8</li>
+            </ul>
+            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+          </td>
+        </tr>
+      </table>
+      <h2 id="total">Total: {{total | currency:'USD':true}}</h2>
+    </div>
+  </div>
+  <div class="clearfix"></div>
 </div>
-<div class="product-items">
-  <p *ngFor="let item of productItems">{{item.description}}</p>
+<div class="related-products">
+      <div class="col-md-3 product">
+        <div class="image" style="background: url(<%= product.image %>); background-size: cover; background-position: center center;"></div>
+        <div class="info">
+        </div>
+      </div>
 </div>

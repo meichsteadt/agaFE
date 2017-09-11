@@ -1,8 +1,16 @@
+<!-- <div class="arrow-wrapper-left" (click)="previousPage()">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+</div>
+<div class="arrow-wrapper-right" (click)="nextPage()">
+  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+</div> -->
 <div class="products row">
   <div class="product col-lg-4" *ngFor="let product of products" (click)="goToDetail(product)">
-    <img src="{{product['image']}}" alt="" class="img-responsive">
-    <div class="info">
-      <p>{{product["name"]}}</p>
+    <div class="image-wrapper">
+      <img src="{{product['image']}}" alt="" class="product-image">
+      <div class="info">
+        <p>{{product["name"]}}</p>
+      </div>
     </div>
   </div>
 </div>
