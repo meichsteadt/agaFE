@@ -15,6 +15,7 @@ export class ProductDetailComponent implements OnInit {
   productId: number = null;
   productItems: ProductItem[] = [];
   total: number;
+  email: string = "";
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
@@ -59,5 +60,11 @@ export class ProductDetailComponent implements OnInit {
       })
     }
     this.total = sum;
+  }
+
+  sendEmail(email) {
+    this.http.post("http://localhost:3000/emails/", {"email_address": email, "product_id": this.productId, "user_id": 1}).subscribe();
+    document.getElementById("email-form").style.display = "none";
+    document.getElementById("email-confirmation").style.display = "block";
   }
 }
