@@ -26,6 +26,10 @@ const appRoutes: Routes = [
     component: ProductsComponent
   },
   {
+    path: 'youth',
+    component: ProductsComponent
+  },
+  {
     path: 'products/:id',
     component: ProductDetailComponent
   }

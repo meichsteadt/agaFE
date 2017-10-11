@@ -9,6 +9,7 @@ import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { YouthComponent } from './youth/youth.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     HomeComponent,
     ProductsComponent,
     ProductDetailComponent,
+    YouthComponent,
   ],
   imports: [
     BrowserModule,
