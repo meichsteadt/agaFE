@@ -8,7 +8,7 @@ header  h1 {
     margin: 0;
     color: #fff;
     position: absolute;
-    left: 50%;
+    left: 25%;
     top: 50%;
     transform: translate(-50%, -50%);
   }

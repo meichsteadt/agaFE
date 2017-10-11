@@ -24,6 +24,24 @@
       <input *ngIf="user" [(ngModel)]="user.diningMult">
     </td>
   </tr>
+  <tr>
+    <td>Occasional</td>
+    <td>
+      <input *ngIf="user" [(ngModel)]="user.occasionalMult">
+    </td>
+  </tr>
+  <tr>
+    <td>Youth</td>
+    <td>
+      <input *ngIf="user" [(ngModel)]="user.youthMult">
+    </td>
+  </tr>
+  <tr>
+    <td>Home</td>
+    <td>
+      <input *ngIf="user" [(ngModel)]="user.homeMult">
+    </td>
+  </tr>
 </table>
 <button (click)="update(user)" class="btn-info btn">Update Multipliers</button>
 <h3>Customer Product Emails:</h3>
