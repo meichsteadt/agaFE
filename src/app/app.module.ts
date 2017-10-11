@@ -9,17 +9,13 @@ import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-<<<<<<< HEAD
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './auth-guard.service';
 import { UserGuardService } from './user-guard.service';
 import { AuthService } from './auth.service';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-=======
-import { YouthComponent } from './youth/youth.component';
 
->>>>>>> 226f0c790533e57ad5263dc13723d146641f7c7d
 
 @NgModule({
   declarations: [
@@ -27,13 +23,9 @@ import { YouthComponent } from './youth/youth.component';
     HomeComponent,
     ProductsComponent,
     ProductDetailComponent,
-<<<<<<< HEAD
     LoginComponent,
     UserComponent,
-    UserLoginComponent,
-=======
-    YouthComponent,
->>>>>>> 226f0c790533e57ad5263dc13723d146641f7c7d
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
