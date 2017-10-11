@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ export class ProductsComponent implements OnInit {
   category: string;
   pagenumber: number = 1;
   pages: number = 0;
-  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService) { }
 
   ngOnInit() {
     this.category = this.router.url;

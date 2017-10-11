@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
-  category: string = "bedroom";
+  category: string = "Homelegance Furniture";
   constructor(private _location: Location, private router: Router) {}
   goTo(page) {
 
