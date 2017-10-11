@@ -30,6 +30,14 @@ const appRoutes: Routes = [
     component: ProductsComponent
   },
   {
+    path: 'home',
+    component: ProductsComponent
+  },
+  {
+    path: 'occasional',
+    component: ProductsComponent
+  },
+  {
     path: 'products/:id',
     component: ProductDetailComponent
   }
