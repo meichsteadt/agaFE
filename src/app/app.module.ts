@@ -9,7 +9,12 @@ import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { YouthComponent } from './youth/youth.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './auth-guard.service';
+import { UserGuardService } from './user-guard.service';
+import { AuthService } from './auth.service';
+import { UserComponent } from './user/user.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 
 @NgModule({
@@ -18,7 +23,9 @@ import { YouthComponent } from './youth/youth.component';
     HomeComponent,
     ProductsComponent,
     ProductDetailComponent,
-    YouthComponent,
+    LoginComponent,
+    UserComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +34,7 @@ import { YouthComponent } from './youth/youth.component';
     routing,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuardService, UserGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

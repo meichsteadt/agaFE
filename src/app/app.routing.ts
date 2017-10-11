@@ -3,27 +3,37 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { AuthGuardService } from './auth-guard.service';
+import { UserGuardService } from './user-guard.service';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'products',
-    component: ProductsComponent
+    component: ProductsComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'dining',
-    component: ProductsComponent
+    component: ProductsComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'bedroom',
-    component: ProductsComponent
+    component: ProductsComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'seating',
-    component: ProductsComponent
+    component: ProductsComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'youth',
@@ -39,7 +49,21 @@ const appRoutes: Routes = [
   },
   {
     path: 'products/:id',
-    component: ProductDetailComponent
+    component: ProductDetailComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [UserGuardService]
+  },
+  {
+    path: 'user-login',
+    component: UserLoginComponent
   }
 ];
 

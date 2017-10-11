@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductItem } from '../product-item.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,14 +17,15 @@ export class ProductDetailComponent implements OnInit {
   productItems: ProductItem[] = [];
   total: number;
   email: string = "";
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private auth: AuthService) { }
 
   ngOnInit() {
+    let user = this.auth.getUser();
     this.route.params.forEach((urlParameters) => {
       this.productId = parseInt(urlParameters['id']);
     });
-    this.http.get("http://localhost:3000/products/" + this.productId).subscribe(i => this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["image"]));
-    this.http.get("http://localhost:3000/products/" + this.productId).subscribe(i => i["product_items"].forEach(item => {
+    this.http.get("http://localhost:3000/users/"+ user +"/products/" + this.productId).subscribe(i => this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["image"]));
+    this.http.get("http://localhost:3000/users/"+ user +"/products/" + this.productId).subscribe(i => i["product_items"].forEach(item => {
       let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0)
       this.productItems.push(productItem)
     }));

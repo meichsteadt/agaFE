@@ -1,0 +1,39 @@
+<h1 class="text-center">User Settings</h1>
+<h3>Customer Multipliers</h3>
+<p id="info"></p>
+<table id="mult-table" class="table table-bordered">
+  <tr>
+    <th>Category</th>
+    <th>Multiplier</th>
+  </tr>
+  <tr>
+    <td>Bedroom</td>
+    <td id="bedroom">
+      <input *ngIf="user" [(ngModel)]="user.bedroomMult">
+    </td>
+  </tr>
+  <tr>
+    <td>Seating</td>
+    <td>
+      <input *ngIf="user" [(ngModel)]="user.seatingMult">
+    </td>
+  </tr>
+  <tr>
+    <td>Dining</td>
+    <td>
+      <input *ngIf="user" [(ngModel)]="user.diningMult">
+    </td>
+  </tr>
+</table>
+<button (click)="update(user)" class="btn-info btn">Update Multipliers</button>
+<h3>Customer Product Emails:</h3>
+<table class="table table-bordered">
+  <tr>
+    <th>Customer Email</th>
+    <th>Product</th>
+  </tr>
+  <tr *ngFor="let email of emails">
+    <td>{{email["email_address"]}}</td>
+    <td><a routerLink="/products/{{email['product_id']}}">{{email["product_number"]}}</a></td>
+  </tr>
+</table>
