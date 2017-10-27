@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  bedroom;
+  dining;
+  occasional;
+  home;
+  seating;
+  youth;
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+      this.http.get('http://localhost:3000/products/3246').subscribe(response => this.dining = response["product"]["images"][0])
+      this.http.get('http://localhost:3000/products/3456').subscribe(response => this.bedroom = response["product"]["images"][0])
+      this.http.get('http://localhost:3000/products/3894').subscribe(response => this.youth = response["product"]["images"][0])
+      this.http.get('http://localhost:3000/products/3689').subscribe(response => this.seating = response["product"]["images"][0])
+      this.http.get('http://localhost:3000/products/3941').subscribe(response => this.occasional = response["product"]["images"][0])
+      this.http.get('http://localhost:3000/products/4205').subscribe(response => this.home = response["product"]["images"][0])
   }
-
 }

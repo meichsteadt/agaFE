@@ -7,9 +7,9 @@
 <div class="products row">
   <div class="product col-lg-4" *ngFor="let product of products" (click)="goToDetail(product)">
     <div class="image-wrapper">
-      <img src="{{product['image']}}" alt="" class="product-image">
+      <img *ngIf="product['images']" src="{{product['images'][0]}}" alt="" class="product-image">
       <div class="info">
-        <p>{{product["number"]}}</p>
+        <p>{{product["name"]}}</p>
       </div>
     </div>
   </div>

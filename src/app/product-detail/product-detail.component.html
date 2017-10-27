@@ -1,6 +1,26 @@
 <div class="row">
   <div class="col-lg-6 product-image-wrapper">
-    <img class="product-image img-responsive" src="{{(product)?.image}}" alt="">
+    <img *ngIf="!multipleImages()" src="{{images[0]}}" class="img-responsive product-image" alt="">
+    <div *ngIf="multipleImages()" id="carousel-example-generic" class="carousel slide" data-interval="0">
+      <!-- Indicators -->
+      <ol class="carousel-indicators hidden-xs">
+          <li (click)="setCurrentImage(i)" [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel-example-generic" [attr.data-slide-to]="i"></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div *ngFor="let image of images; let i = index" class="item" [class.active]="active(i)">
+            <img class="img-responsive" src="{{image}}" alt="">
+        </div>
+      </div>
+      <!-- Controls -->
+      <a class="left carousel-control" data-target="#carousel-example-generic" data-slide="prev">
+          <span class="icon-prev"></span>
+      </a>
+      <a class="right carousel-control" data-target="#carousel-example-generic" data-slide="next">
+          <span class="icon-next"></span>
+      </a>
+    </div>
+
     <form id="email-form" class="form-inline">
       <div class="input-field">
         <input name="email" type="email" [value]="email" (input)="email = $event.target.value" placeholder="Send To Email">
