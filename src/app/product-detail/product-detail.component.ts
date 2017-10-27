@@ -19,10 +19,12 @@ export class ProductDetailComponent implements OnInit {
   email: string = "";
   images: String[] = [];
   currentImage: number = 0;
+  user: string;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService) { }
 
   ngOnInit() {
     let user = this.auth.getUser();
+    this.user = user;
     this.route.params.subscribe((urlParameters) => {
       this.productId = parseInt(urlParameters['id']);
       this.getProduct(user);
@@ -32,13 +34,13 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct(user) {
     this.productItems = [];
-    this.http.get("http://localhost:3000/users/"+ user +"/products/" + this.productId).subscribe(i =>
+    this.http.get("https://homelegance-kiosk.herokuapp.com/users/"+ user +"/products/" + this.productId).subscribe(i =>
       {
         this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
         this.images = i["product"]["images"]
       }
-    , error => this.next());
-    this.http.get("http://localhost:3000/users/"+ user +"/products/" + this.productId).subscribe(i => i["product_items"].forEach(item => {
+    , error => this.catchError(error));
+    this.http.get("https://homelegance-kiosk.herokuapp.com/users/"+ user +"/products/" + this.productId).subscribe(i => i["product_items"].forEach(item => {
       let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0)
       this.productItems.push(productItem)
     }));
@@ -77,7 +79,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   sendEmail(email) {
-    this.http.post("http://localhost:3000/emails/", {"email_address": email, "product_id": this.productId, "user_id": 1}).subscribe();
+    this.http.post("https://homelegance-kiosk.herokuapp.com/emails/", {"email_address": email, "product_id": this.productId, "user_id": this.user}).subscribe(res => console.log(res));
     document.getElementById("email-form").style.display = "none";
     document.getElementById("email-confirmation").style.display = "block";
   }
@@ -104,5 +106,9 @@ export class ProductDetailComponent implements OnInit {
     else {
       return false
     }
+  }
+
+  catchError(error) {
+    this.auth.resetToken();
   }
 }

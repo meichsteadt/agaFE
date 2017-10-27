@@ -10,14 +10,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
-
+  password;
+  email;
   constructor(private auth: AuthService, private http: HttpClient, private _location: Location, private router: Router) { }
 
   ngOnInit() {
   }
 
   submit(email, password) {
-    this.http.post("http://localhost:3000/login.json", {'login': email, 'password': password}).subscribe(i => this.auth.setUser(i["user"]))
+    this.http.post("https://homelegance-kiosk.herokuapp.com/login.json", {'login': email, 'password': password}).subscribe(i => this.auth.setUser(i["user"]))
     this.router.navigate(['/user'])
   }
 

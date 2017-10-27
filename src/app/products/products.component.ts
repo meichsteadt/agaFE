@@ -18,8 +18,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.category = this.router.url;
-    this.http.get("http://localhost:3000" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
-    this.http.get("http://localhost:3000" + this.category).subscribe(i => this.pages = i["length"]/6);
+    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
+    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category).subscribe(i => this.pages = i["length"]/6);
   }
 
   goToDetail(clickedProduct) {
@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit {
 
   setPage(number) {
     this.pagenumber = number;
-    this.http.get("http://localhost:3000" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
+    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
   }
 
   nextPage() {
@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit {
     else {
       this.pagenumber += 1;
     }
-    this.http.get("http://localhost:3000" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
+    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
   }
 
   previousPage() {
@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit {
     else {
       this.pagenumber -= 1;
     }
-    this.http.get("http://localhost:3000" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
+    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
   }
 
 }

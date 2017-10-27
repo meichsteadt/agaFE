@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   getUser() {
     return localStorage.getItem("user");
   }
@@ -16,5 +16,11 @@ export class AuthService {
   setUser(user) {
     localStorage.setItem("user", user["id"]);
     localStorage.setItem("token", user["auth_token"]);
+  }
+
+  resetToken() {
+    localStorage.setItem("user", null);
+    localStorage.setItem("token", null);
+    this.router.navigate(['/login']);
   }
 }
