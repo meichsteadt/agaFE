@@ -82,7 +82,7 @@ header li a:hover {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  zoom: 15%;
+  zoom: 80%;
 }
 .product .info {
   background-color: rgba(0,0,0,0.8);
