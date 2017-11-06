@@ -18,7 +18,17 @@ export class LoginComponent implements OnInit {
   }
 
   submit(email, password) {
-    this.http.post("https://homelegance-kiosk.herokuapp.com/login.json", {'login': email, 'password': password}).subscribe(i => this.auth.setUser(i["user"]))
-    this.router.navigate(['/'])
+    document.getElementById("error").style.display = "none";
+    this.http.post("https://homelegance-kiosk.herokuapp.com/login.json", {'login': email, 'password': password}).subscribe(i => this.success(i), error => this.catchError(error))
+  }
+
+  success(response) {
+    this.auth.setUser(response["user"]);
+    this.router.navigate(['/']);
+  }
+
+  catchError(error) {
+    console.log(error);
+    document.getElementById("error").style.display = "block";
   }
 }
