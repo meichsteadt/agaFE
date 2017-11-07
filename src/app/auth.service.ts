@@ -36,7 +36,9 @@ export class AuthService {
   readCookie(cookie) {
     let res = cookie.split(";").filter(function(item) {
       return typeof item == 'string' && item.indexOf("homeleganceUser=") > -1;
-    })
-    return res[0].split("=")[1];
+    });
+    if(res.length > 0) {
+      return res[0].split("=")[1];
+    }
   }
 }
