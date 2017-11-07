@@ -9,8 +9,11 @@ export class AuthService {
     if(localStorage.getItem("user")) {
       return localStorage.getItem("user");
     }
-    else if(document.cookie) {
+    else if(this.readCookie(document.cookie)) {
       return this.readCookie(document.cookie);
+    }
+    else {
+      this.router.navigate(['/login']);
     }
   }
 
