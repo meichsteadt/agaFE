@@ -6,7 +6,12 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
   getUser() {
-    return localStorage.getItem("user");
+    if(localStorage.getItem("user")) {
+      return localStorage.getItem("user");
+    }
+    else if(document.cookie) {
+      return this.readCookie(document.cookie);
+    }
   }
 
   getToken() {
@@ -16,11 +21,19 @@ export class AuthService {
   setUser(user) {
     localStorage.setItem("user", user["id"]);
     localStorage.setItem("token", user["auth_token"]);
+    document.cookie = "homeleganceUser="+user["id"];
   }
 
   resetToken() {
-    localStorage.setItem("user", null);
-    localStorage.setItem("token", null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     this.router.navigate(['/login']);
+  }
+
+  readCookie(cookie) {
+    let res = cookie.split(";").filter(function(item) {
+      return typeof item == 'string' && item.indexOf("homeleganceUser=") > -1;
+    })
+    return res[0].split("=")[1];
   }
 }
