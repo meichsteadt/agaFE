@@ -40,5 +40,8 @@ export class AuthService {
     if(res.length > 0) {
       return res[0].split("=")[1];
     }
+    else {
+      return false;
+    }
   }
 }
