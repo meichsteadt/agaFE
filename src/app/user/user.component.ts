@@ -22,7 +22,8 @@ export class UserComponent implements OnInit {
       {
         this.user = new User(i["user"]["id"], i["user"]["bedroom_mult"], i["user"]["dining_mult"], i["user"]["seating_mult"], i["user"]["youth_mult"], i["user"]["occasional_mult"], i["user"]["home_mult"]);
         this.emails = i["emails"];
-      }
+      },
+      error => this.handleError()
     )
   }
 
@@ -30,6 +31,10 @@ export class UserComponent implements OnInit {
     document.getElementById("info").innerHTML = ""
     this.http.put("https://homelegance-kiosk.herokuapp.com/users/" + this.auth.getUser(), {"bedroom_mult": parseFloat(user.bedroomMult), "dining_mult": parseFloat(user.diningMult), "seating_mult": parseFloat(user.seatingMult), "occasional_mult": parseFloat(user.occasionalMult), "youth_mult": parseFloat(user.youthMult), "home_mult": parseFloat(user.homeMult)}, {headers: this.headers}).subscribe(i => console.log(i))
     document.getElementById("info").innerHTML = "Multipliers updated successfully."
+  }
+
+  handleError() {
+    this.auth.resetToken();
   }
 
 }

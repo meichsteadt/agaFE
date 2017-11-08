@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   success(response) {
     this.auth.setUser(response["user"]);
-    this.router.navigate(['/']);
+    this.router.navigate(['/user']);
   }
 
   catchError(error) {

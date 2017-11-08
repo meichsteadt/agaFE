@@ -30,6 +30,7 @@ export class AuthService {
   resetToken() {
     localStorage.removeItem("homeleganceUser");
     localStorage.removeItem("token");
+    document.cookie = "homeleganceUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     this.router.navigate(['/login']);
   }
 

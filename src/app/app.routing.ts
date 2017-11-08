@@ -13,27 +13,22 @@ const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: 'products',
     component: ProductsComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: 'dining',
     component: ProductsComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: 'bedroom',
     component: ProductsComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: 'seating',
     component: ProductsComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: 'youth',
@@ -59,7 +54,7 @@ const appRoutes: Routes = [
   {
     path: 'user',
     component: UserComponent,
-    canActivate: [UserGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'user-login',
