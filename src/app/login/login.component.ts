@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email;
   password;
-  cookie = document.cookie;
   user = this.auth.getUser();
   constructor(private auth: AuthService, private http: HttpClient, private _location: Location, private router: Router) { }
 
   ngOnInit() {
+    console.log(user);
   }
 
   submit(email, password) {
