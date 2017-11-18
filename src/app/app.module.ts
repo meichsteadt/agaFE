@@ -15,6 +15,7 @@ import { UserGuardService } from './user-guard.service';
 import { AuthService } from './auth.service';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { AhoyComponent } from './ahoy/ahoy.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
     ProductDetailComponent,
     LoginComponent,
     UserComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    AhoyComponent
   ],
   imports: [
     BrowserModule,

@@ -3,23 +3,36 @@ import { Product } from '../product.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
+  providers: [ProductService]
 })
 export class ProductsComponent implements OnInit {
   products;
   category: string;
   pagenumber: number = 1;
   pages: number = 0;
-  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService) { }
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private productService: ProductService) { }
 
   ngOnInit() {
     this.category = this.router.url;
-    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
-    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category).subscribe(i => this.pages = i["length"]/6);
+    if(this.category !== localStorage.getItem("category")) {
+      localStorage.setItem("pageNumber", "1")
+      localStorage.setItem("category", this.category);
+    }
+    if(localStorage.getItem("pageNumber")) {
+      this.pagenumber = parseInt(localStorage.getItem("pageNumber"));
+    }
+    this.productService.getProducts(this.category, this.pagenumber).subscribe(response => {
+      this.products = response;
+    });
+    this.productService.getPageNumbers(this.category).subscribe(i =>{
+      this.pages = Math.ceil(i["length"]/6);
+    });
   }
 
   goToDetail(clickedProduct) {
@@ -42,27 +55,28 @@ export class ProductsComponent implements OnInit {
 
   setPage(number) {
     this.pagenumber = number;
-    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
+    this.productService.getProducts(this.category, this.pagenumber).subscribe(response => {
+      this.products = response;
+    });
+    localStorage.setItem("pageNumber", this.pagenumber + "");
   }
 
   nextPage() {
     if (this.pagenumber == this.pages) {
-      this.pagenumber = 1;
+      this.setPage(1);
     }
     else {
-      this.pagenumber += 1;
+      this.setPage(this.pagenumber + 1);
     }
-    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
   }
 
   previousPage() {
     if (this.pagenumber == 1) {
-      this.pagenumber = this.pages
+      this.setPage(this.pages);
     }
     else {
-      this.pagenumber -= 1;
+      this.setPage(this.pagenumber -= 1)
     }
-    this.http.get("https://homelegance-kiosk.herokuapp.com" + this.category + "/" + this.pagenumber).subscribe(i => this.products = i);
   }
 
 }

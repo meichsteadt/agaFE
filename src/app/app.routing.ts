@@ -8,6 +8,7 @@ import { UserGuardService } from './user-guard.service';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { AhoyComponent } from './ahoy/ahoy.component';
 
 const appRoutes: Routes = [
   {
@@ -59,6 +60,10 @@ const appRoutes: Routes = [
   {
     path: 'user-login',
     component: UserLoginComponent
+  },
+  {
+    path: 'ahoy/events',
+    component: AhoyComponent
   }
 ];
 

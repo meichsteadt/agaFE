@@ -114,3 +114,19 @@ td {
 #email-confirmation {
   display: none;
 }
+
+#imageModal {
+  text-align: center;
+  overflow-y: hidden;
+}
+
+#imageModal .modal-dialog{
+  width: auto;
+  margin: 0;
+  display: inline-block;
+}
+
+#imageModal img {
+  height: 100vh;
+  width: auto;
+}

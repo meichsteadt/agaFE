@@ -5,11 +5,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth.service';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
+  providers: [ProductService]
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6 product-image-wrapper">
-    <img *ngIf="!multipleImages()" src="{{images[0]}}" class="img-responsive product-image" alt="">
+    <img *ngIf="!multipleImages()" src="{{images[0]}}" class="img-responsive product-image" alt="" data-toggle="modal" data-target="#imageModal">
     <div *ngIf="multipleImages()" id="carousel-example-generic" class="carousel slide" data-interval="0">
       <!-- Indicators -->
       <ol class="carousel-indicators hidden-xs">
@@ -9,7 +9,7 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div *ngFor="let image of images; let i = index" class="item" [class.active]="active(i)">
-            <img class="img-responsive" src="{{image}}" alt="">
+            <img class="img-responsive" src="{{image}}" alt="" data-toggle="modal" data-target="#imageModal">
         </div>
       </div>
       <!-- Controls -->
@@ -75,4 +75,30 @@
         <div class="info">
         </div>
       </div>
+</div>
+
+<div id="imageModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <img *ngIf="!multipleImages()" src="{{images[0]}}" class="img-responsive product-image" alt="">
+    <div *ngIf="multipleImages()" id="carousel2" class="carousel slide" data-interval="0">
+      <!-- Indicators -->
+      <ol class="carousel-indicators hidden-xs">
+          <li [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel2" [attr.data-slide-to]="i"></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div *ngFor="let image of images; let i = index" class="item" [class.active]="active(i)">
+            <img class="img-responsive" src="{{image}}" alt="">
+        </div>
+      </div>
+      <!-- Controls -->
+      <a class="left carousel-control" data-target="#carousel2" data-slide="prev">
+          <span class="icon-prev"></span>
+      </a>
+      <a class="right carousel-control" data-target="#carousel2" data-slide="next">
+          <span class="icon-next"></span>
+      </a>
+    </div>
+  </div>
 </div>
