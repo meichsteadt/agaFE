@@ -22,7 +22,7 @@ export class ProductDetailComponent implements OnInit {
   images: String[] = [];
   currentImage: number = 0;
   user: string;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService, private productService: ProductService) { }
 
   ngOnInit() {
     let user = this.auth.getUser();
@@ -36,17 +36,17 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct(user) {
     this.productItems = [];
-    this.http.get("https://homelegance-kiosk.herokuapp.com/users/"+ user +"/products/" + this.productId).subscribe(i =>
+    this.productService.getProduct(this.productId, this.user).subscribe(i =>
       {
         this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
-        this.images = i["product"]["images"]
+        this.images = i["product"]["images"];
+        i["product_items"].forEach(item => {
+          let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0)
+          this.productItems.push(productItem)
+        })
       }
     , error => this.catchError(error));
-    this.http.get("https://homelegance-kiosk.herokuapp.com/users/"+ user +"/products/" + this.productId).subscribe(i => i["product_items"].forEach(item => {
-      let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0)
-      this.productItems.push(productItem)
-    }));
-  }
+    }
 
   dropDown(event, item) {
     let element = event.srcElement.parentElement.children[1];

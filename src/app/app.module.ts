@@ -16,6 +16,9 @@ import { AuthService } from './auth.service';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AhoyComponent } from './ahoy/ahoy.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+import { SearchComponent } from './search/search.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { AhoyComponent } from './ahoy/ahoy.component';
     LoginComponent,
     UserComponent,
     UserLoginComponent,
-    AhoyComponent
+    AhoyComponent,
+    SubCategoriesComponent,
+    SearchComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

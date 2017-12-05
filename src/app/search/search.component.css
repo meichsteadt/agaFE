@@ -1,0 +1,38 @@
+.navbar-form {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+input {
+  border: none;
+  border-radius: none;
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.input-group-addon {
+  background-color: #fff;
+  border: none;
+  font-size: 20px;
+}
+
+.modal-body form {
+  width: 100%;
+}
+
+.modal-body input {
+  width: 80%;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.modal-header {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #659DBD;
+  color: #eee;
+}

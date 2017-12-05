@@ -32,10 +32,12 @@ table th {
 td {
   width: 25%;
   text-align: left;
+  font-size: 16px;
 }
 
 #total {
   border-bottom: 1px solid #333;
+  font-family: 'Raleway', sans-serif !important;
 }
 
 .item-pick {
@@ -129,4 +131,30 @@ td {
 #imageModal img {
   height: 100vh;
   width: auto;
+}
+
+
+
+.arrow-wrapper-right, .arrow-wrapper-left {
+  position: fixed;
+  color: #000;
+  z-index: 2;
+  font-size: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow-wrapper-left {
+  left: 0;
+}
+
+.arrow-wrapper-right {
+  right: 0;
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 100%;
+  border: 5px solid #000;
 }

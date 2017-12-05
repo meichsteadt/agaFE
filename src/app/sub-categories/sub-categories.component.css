@@ -1,0 +1,27 @@
+.sub-categories {
+  margin: 10px auto;
+  border: 5px solid #333;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.pagination {
+  margin: 0;
+}
+
+.pagination > .active > a {
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
+}
+
+.pagination > li > a {
+  color: #333;
+  border-color: #333;
+}
+.pagination > li > a:hover {
+  border-color: #333;
+}

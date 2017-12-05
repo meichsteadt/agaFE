@@ -1,15 +1,17 @@
-<div class="arrow-wrapper-left" (click)="previousPage()">
-  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-</div>
-<div class="arrow-wrapper-right" (click)="nextPage()">
-  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-</div>
 <div class="products clearfix">
-  <div class="product col-lg-4" *ngFor="let product of products" (click)="goToDetail(product)">
+  <div routerLink="/{{category}}" *ngIf="pagenumber == 1" class="col-xs-4 product">
     <div class="image-wrapper">
-      <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
+      <img src="{{getSubCategoryThumbnails(category)}}" alt="" class="product-image">
       <div class="info">
-        <p>{{product["name"]}}</p>
+        <p>All</p>
+      </div>
+    </div>
+  </div>
+  <div class="product col-xs-4" *ngFor="let category of subCategories" routerLink="/products/sub-categories/{{linkize(category['name'])}}">
+    <div class="image-wrapper">
+      <img *ngIf="category['thumbnail']" src="{{category['thumbnail']}}" alt="" class="product-image">
+      <div class="info">
+        <p>{{category["name"]}}</p>
       </div>
     </div>
   </div>

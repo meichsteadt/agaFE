@@ -1,0 +1,33 @@
+<header>
+  <span (click)="goBack()" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+  <h1 routerLink="/" routerLinkActive="active">Homelegance Furniture</h1>
+  <div class="nav-right">
+    <app-search class="search"></app-search>
+    <div class="categories text-center">
+      <span (click)="openNav()" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+      <p style="font-size: 14px;">Categories</p>
+    </div>
+  </div>
+</header>
+
+<div id="nav-bar" class="category-menu">
+  <div class="category-header">
+    <h2>Categories</h2>
+    <button (click)="closeNav()" type="button" class="close">&times;</button>
+  </div>
+  <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li *ngFor="let category of generateArray(navSubCategories)" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{category[0] | titlecase}}<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li (click)="closeNav()" routerLink="{{category[0]}}"><a>All</a></li>
+          <li (click)="closeNav()" (click)="goTo(sub['name'])" *ngFor="let sub of category[1]"><a>{{sub["name"]}}</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+  <ul style="list-style: none;display: none;">
+  </ul>
+</div>
+
+<div (click)="closeNav()" id="overlay" class="overlay"></div>

@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Raleway', sans-serif !important;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
+  font-family: 'Josefin Slab', serif !important;
+}
+
+
+.product {
+  position: relative;
+  margin-bottom: 20px;
+  height: 33vh;
+  box-sizing: border-box;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 33vh;
+  overflow: hidden;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5), -3px 3px 5px rgba(0,0,0,0.5);
+}
+
+.product img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.product .info {
+  background-color: rgba(0,0,0,0.8);
+  width: 100%;
+  padding: 0 10px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+}
+
+.product .info p {
+  color: #fff;
+  font-size: 25px;
+  padding: 10px;
+  font-family: 'Josefin Slab', serif;
+}
+
+div, h1, h2, h3, h4, a {
+  outline: none;
+}
+
+.btn-info {
+  background-color: #659DBD !important;
+  border-color: #659DBD !important;
+}

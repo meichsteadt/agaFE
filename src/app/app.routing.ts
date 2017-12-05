@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AhoyComponent } from './ahoy/ahoy.component';
+import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
+import { SearchComponent } from './search/search.component';
 
 const appRoutes: Routes = [
   {
@@ -44,6 +46,10 @@ const appRoutes: Routes = [
     component: ProductsComponent
   },
   {
+    path: 'products/search',
+    component: ProductsComponent
+  },
+  {
     path: 'products/:id',
     component: ProductDetailComponent,
     canActivate: [AuthGuardService],
@@ -64,6 +70,18 @@ const appRoutes: Routes = [
   {
     path: 'ahoy/events',
     component: AhoyComponent
+  },
+  {
+    path: 'sub-categories/:category',
+    component: SubCategoriesComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
+  },
+  {
+    path: 'products/sub-categories/:category',
+    component: ProductsComponent
   }
 ];
 

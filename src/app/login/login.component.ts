@@ -3,17 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
   email;
   password;
   user = this.auth.getUser();
-  constructor(private auth: AuthService, private http: HttpClient, private _location: Location, private router: Router) { }
+  constructor(private auth: AuthService, private http: HttpClient, private _location: Location, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     console.log(this.user);
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   submit(email, password) {
     document.getElementById("error").style.display = "none";
-    this.http.post("https://homelegance-kiosk.herokuapp.com/login.json", {'login': email, 'password': password}).subscribe(i => this.success(i), error => this.catchError(error))
+    this.userService.login(this.email, this.password).subscribe(i => this.success(i), error => this.catchError(error))
   }
 
   success(response) {
