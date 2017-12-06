@@ -17,6 +17,12 @@
   </div>
 </div>
 <nav *ngIf="pages > 1" aria-label="Page navigation" class="text-center">
+  <div class="arrow-wrapper-left" (click)="previousPage()">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  </div>
+  <div class="arrow-wrapper-right" (click)="nextPage()">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </div>
   <ul class="pagination">
     <li (click)="previousPage()">
       <a><span aria-hidden="true">&laquo;</span></a>

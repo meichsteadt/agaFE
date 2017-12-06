@@ -1,11 +1,14 @@
-.sub-categories {
-  margin: 10px auto;
-  border: 5px solid #333;
-  background-color: #555;
+.glyphicon-arrow-left {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
   color: #fff;
-  text-align: center;
-  padding: 30px;
-  border-radius: 20px;
+  z-index: 2;
+}
+.glyphicon-arrow-left:hover {
+  color: #ddd;
 }
 
 .pagination {
@@ -24,4 +27,28 @@
 }
 .pagination > li > a:hover {
   border-color: #333;
+}
+
+.arrow-wrapper-right, .arrow-wrapper-left {
+  position: fixed;
+  color: #222;
+  z-index: 2;
+  font-size: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.arrow-wrapper-left {
+  left: 0;
+}
+
+.arrow-wrapper-right {
+  right: 0;
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 100%;
+  border: 5px solid #222;
 }

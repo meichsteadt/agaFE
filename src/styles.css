@@ -7,6 +7,9 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
   font-family: 'Josefin Slab', serif !important;
 }
 
+.products {
+  min-height: 66vh;
+}
 
 .product {
   position: relative;
