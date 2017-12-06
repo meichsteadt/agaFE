@@ -77,8 +77,8 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  goTo(subCategory) {
-    this.router.navigate(["/products/sub-categories/" + this.linkize(subCategory)])
+  goTo(subCategory_id) {
+    this.router.navigate(["/products/sub-categories/" + subCategory_id])
   }
 
   hasSubCategories(category) {

@@ -111,7 +111,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   catchError(error) {
-    // this.auth.resetToken();
-    console.log(error)
+    this.auth.resetToken();
   }
 }

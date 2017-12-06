@@ -21,7 +21,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{category[0] | titlecase}}<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li (click)="closeNav()" routerLink="{{category[0]}}"><a>All</a></li>
-          <li (click)="closeNav()" (click)="goTo(sub['name'])" *ngFor="let sub of category[1]"><a>{{sub["name"]}}</a></li>
+          <li (click)="closeNav()" (click)="goTo(sub['id'])" *ngFor="let sub of category[1]"><a>{{sub["name"]}}</a></li>
         </ul>
       </li>
       <li (click)="closeNav()" routerLink="occasional"><a>Occasional</a></li>
