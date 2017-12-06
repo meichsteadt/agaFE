@@ -14,7 +14,6 @@ export class SearchComponent implements OnInit {
   }
 
   onSubmit(form) {
-    this.router.navigate(['/products/search', {"search": form.value.search}])
+    this.router.navigate(['/products/search', {"search": form.value.search.toLowerCase()}])
   }
-
 }
