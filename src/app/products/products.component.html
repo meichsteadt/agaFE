@@ -1,29 +1,34 @@
-<div class="arrow-wrapper-left" (click)="previousPage()">
-  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-</div>
-<div class="arrow-wrapper-right" (click)="nextPage()">
-  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-</div>
-<div class="products clearfix">
-  <div class="product col-xs-4" *ngFor="let product of products" (click)="goToDetail(product)">
-    <div class="image-wrapper">
-      <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
-      <div class="info">
-        <p>{{product["name"]}}</p>
+  <div class="arrow-wrapper-left" (click)="previousPage()">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  </div>
+  <div class="arrow-wrapper-right" (click)="nextPage()">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </div>
+<div *ngIf="!noProducts">
+  <div class="products clearfix">
+    <div class="product col-xs-4" *ngFor="let product of products" (click)="goToDetail(product)">
+      <div class="image-wrapper">
+        <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
+        <div class="info">
+          <p>{{product["name"]}}</p>
+        </div>
       </div>
     </div>
   </div>
+  <nav *ngIf="pages > 1" aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+      <li (click)="previousPage()">
+        <a><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li *ngFor="let pagenumber of createRange(pages)" [ngClass]="compare(pagenumber)" (click)="setPage(pagenumber)">
+        <a>{{pagenumber}}</a>
+      </li>
+      <li (click)="nextPage()">
+        <a><span aria-hidden="true">&raquo;</span></a>
+      </li>
+    </ul>
+  </nav>
 </div>
-<nav aria-label="Page navigation" class="text-center">
-  <ul class="pagination">
-    <li (click)="previousPage()">
-      <a><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    <li *ngFor="let pagenumber of createRange(pages)" [ngClass]="compare(pagenumber)" (click)="setPage(pagenumber)">
-      <a>{{pagenumber}}</a>
-    </li>
-    <li (click)="nextPage()">
-      <a><span aria-hidden="true">&raquo;</span></a>
-    </li>
-  </ul>
-</nav>
+<div *ngIf="noProducts">
+  <h1 class="text-center">Sorry, no products match that criteria</h1>
+</div>

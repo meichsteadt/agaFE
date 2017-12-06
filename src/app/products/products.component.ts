@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
   pages: number = 0;
   search: boolean = false;
   searchParams: string;
+  noProducts: boolean = false;
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private productService: ProductService) { }
 
   ngOnInit() {
@@ -38,10 +39,20 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  checkProductsLength(){
+    if(!this.products || this.products.length < 1) {
+      this.noProducts = true;
+    }
+    else {
+      this.noProducts = false;
+    }
+  }
+
   getSearchProducts(search) {
     this.productService.search(search, this.auth.getUser(), this.pagenumber).subscribe(response => {
-      this.products = response["products"]
-      this.pages = Math.ceil(response["pages"]/6)
+      this.products = response["products"];
+      this.pages = Math.ceil(response["pages"]/6);
+      this.checkProductsLength();
     })
   }
 
