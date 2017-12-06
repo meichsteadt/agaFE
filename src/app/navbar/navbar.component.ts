@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit {
       })
     })
     this.navSubCategories = categories;
+    console.log(this.navSubCategories)
   }
 
   generateArray(obj) {
@@ -78,5 +79,14 @@ export class NavbarComponent implements OnInit {
 
   goTo(subCategory) {
     this.router.navigate(["/products/sub-categories/" + this.linkize(subCategory)])
+  }
+
+  hasSubCategories(category) {
+    if(category[0] !== "occasional") {
+      return true
+    }
+    else {
+      return false
+    }
   }
 }

@@ -36,7 +36,7 @@ export class ProductService {
   }
 
   paramize(string) {
-    if (string == "beds-headboards"){
+    if (string == "beds-headboards" || string == "buffets-hutches"){
       return string.replace(/-/g, '/');
     }
     return string.replace(/-/g, ' ');

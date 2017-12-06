@@ -5,7 +5,7 @@
   <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 </div>
 <div class="products clearfix">
-  <div class="product col-lg-4" *ngFor="let product of products" (click)="goToDetail(product)">
+  <div class="product col-xs-4" *ngFor="let product of products" (click)="goToDetail(product)">
     <div class="image-wrapper">
       <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
       <div class="info">

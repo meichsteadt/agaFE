@@ -1,5 +1,5 @@
 
-  <div class="col-lg-6 product-image-wrapper">
+  <div class="col-xs-6 product-image-wrapper">
     <img *ngIf="!multipleImages()" src="{{images[0]}}" class="img-responsive product-image" alt="" data-toggle="modal" data-target="#imageModal">
     <div *ngIf="multipleImages()" id="carousel-example-generic" class="carousel slide" data-interval="0">
       <!-- Indicators -->
@@ -29,12 +29,12 @@
     </form>
     <p id="email-confirmation">Thank you! Your email has been sent.</p>
   </div>
-  <div class="col-lg-6 product-info">
+  <div class="col-xs-6 product-info">
     <h1>{{(product)?.name}}</h1>
     <h3>Product Number: {{(product)?.number}}</h3>
     <p class="product-description">{{(product)?.description}}</p>
     <hr>
-    <div class="col-lg-12 item-pick">
+    <div class="col-xs-12 item-pick">
       <h2 class="text-center">Pick Your Items</h2>
       <table>
         <tr>

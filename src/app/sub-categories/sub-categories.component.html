@@ -7,7 +7,7 @@
       </div>
     </div>
   </div>
-  <div class="product col-xs-4" *ngFor="let category of subCategories" routerLink="/products/sub-categories/{{linkize(category['name'])}}">
+  <div class="product col-xs-4" *ngFor="let category of subCategories" routerLink="/products/sub-categories/{{category['id']}}">
     <div class="image-wrapper">
       <img *ngIf="category['thumbnail']" src="{{category['thumbnail']}}" alt="" class="product-image">
       <div class="info">
@@ -16,7 +16,7 @@
     </div>
   </div>
 </div>
-<nav aria-label="Page navigation" class="text-center">
+<nav *ngIf="pages > 1" aria-label="Page navigation" class="text-center">
   <ul class="pagination">
     <li (click)="previousPage()">
       <a><span aria-hidden="true">&laquo;</span></a>
