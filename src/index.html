@@ -11,6 +11,45 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <span class="loading">Loading
+      <span class="dot1">.</span>
+      <span class="dot2">.</span>
+      <span class="dot3">.</span>
+    </span>
+  </app-root>
+
+  <style media="screen">
+
+  .loading {
+    font-family: 'Josefin Slab';
+    font-size: 80px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .dot1, .dot2, .dot3 {
+    animation-name: fade;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+  }
+
+  .dot2 {
+    animation-delay: .2s;
+  }
+
+  .dot3 {
+    animation-delay: .4s;
+  }
+
+
+  @keyframes fade {
+    0% {opacity: 1;}
+    33% { opacity: 0;}
+    100% {opacity: 1;}
+  }
+  </style>
 </body>
 </html>

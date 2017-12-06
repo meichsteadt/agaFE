@@ -16,6 +16,8 @@ header  h1 {
   display: table-cell;
   vertical-align: middle;
   font-size: 45px;
+  position: relative;
+  top: 5px;
   }
 header ul {
   position: absolute;
