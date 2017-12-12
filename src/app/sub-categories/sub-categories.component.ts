@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import 'ahoy.js';
+declare var ahoy: any;
 
 @Component({
   selector: 'app-sub-categories',
@@ -24,6 +26,8 @@ export class SubCategoriesComponent implements OnInit {
       this.category = urlParameters['category'];
     });
     this.setPage(this.pagenumber);
+    ahoy.trackView();
+    ahoy.trackClicks();
   }
 
   linkize(string) {

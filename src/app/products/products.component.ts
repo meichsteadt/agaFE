@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
+import 'ahoy.js';
+declare var ahoy: any;
 
 @Component({
   selector: 'app-products',
@@ -109,6 +111,8 @@ export class ProductsComponent implements OnInit {
     else {
       this.getProducts(this.category, number);
     }
+    ahoy.trackView();
+    ahoy.trackClicks();
     localStorage.setItem("pageNumber", this.pagenumber + "");
   }
 

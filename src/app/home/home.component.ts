@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import 'ahoy.js';
+declare var ahoy: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,5 +23,7 @@ export class HomeComponent implements OnInit {
       this.http.get('https://homelegance-kiosk.herokuapp.com/products/3689').subscribe(response => this.seating = response["product"]["thumbnail"])
       this.http.get('https://homelegance-kiosk.herokuapp.com/products/3941').subscribe(response => this.occasional = response["product"]["thumbnail"])
       this.http.get('https://homelegance-kiosk.herokuapp.com/products/4205').subscribe(response => this.home = response["product"]["thumbnail"])
+      ahoy.trackView();
+      ahoy.trackClicks();
   }
 }

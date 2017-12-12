@@ -20,7 +20,6 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
 import { SearchComponent } from './search/search.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

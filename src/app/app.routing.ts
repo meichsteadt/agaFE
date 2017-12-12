@@ -82,6 +82,10 @@ const appRoutes: Routes = [
   {
     path: 'products/sub-categories/:category',
     component: ProductsComponent
+  },
+  {
+    path: 'ahoy',
+    component: AhoyComponent
   }
 ];
 

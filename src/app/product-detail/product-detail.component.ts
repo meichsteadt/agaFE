@@ -6,7 +6,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
-
+import 'ahoy.js';
+declare var ahoy: any;
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -32,6 +33,8 @@ export class ProductDetailComponent implements OnInit {
       this.getProduct(user);
     });
     this.setTotal();
+    ahoy.trackView();
+    ahoy.trackClicks();
   }
 
   getProduct(user) {
