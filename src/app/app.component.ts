@@ -40,9 +40,11 @@ export class AppComponent {
       startOnReady: true
     });
     this.http.post("http://localhost:3000/ahoy/visits", {});
-    setInterval(i => {
-      this.checkTime();
-    }, 1000)
+    if (this.auth.getUser() === "1") {
+      setInterval(i => {
+        this.checkTime();
+      }, 1000)
+    }
   }
 
   goTo(page) {
@@ -62,7 +64,7 @@ export class AppComponent {
   checkTime() {
     var now:any = new Date
     if((now - this.time)/1000 >= 600) {
-      this.router.navigateByUrl('/?user=' + this.auth.getUser())
+      this.router.navigateByUrl('/?user=1')
     }
   }
 
