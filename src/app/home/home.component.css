@@ -1,124 +1,75 @@
-/*body {
-  font-family: 'Raleway', sans-serif;
+#nav-bar {
+  display: none;
 }
 
-h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
-  font-family: 'Open Sans', sans-serif;
-}
-
-header {
-  height: 70px;
-  background-color: #333;
+body {
+  min-height: 100vh;
   position: relative;
-  margin-bottom: 10px;
+  margin: 0;
+  padding: 0;
 }
-header  h1 {
-    margin: 0;
-    color: #fff;
-    position: relative;
-    padding-top: 10px;
-  }
-header ul {
+
+.splash {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  right: 20px;
+  left: -10px;
+  top: 0;
+  height: 100%;
+  width: 120%;
+  background: url('https://s3-us-west-1.amazonaws.com/homelegance/Images_MidRes_For+Customer+Advertisement/2159-1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(55%) blur(2px);
+
 }
-header li a{
-  color: #fff;
-  font-size: 16px;
-}
-header li a:hover {
-  text-decoration: underline;
-  cursor: pointer;
-  color: #fff;
-}
-.glyphicon-arrow-left {
+
+.logo {
   position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 30px;
-  color: #fff;
-  z-index: 2;
-}
-.glyphicon-arrow-left:hover {
-  color: #ddd;
+  left: 20px;
+  top: 20px;
+  color: #f2f2f2;
+  font-family: 'Raleway', serif;
+  font-size: 70px;
+  border-radius: 50%;
+  width: 150px;
 }
 
-.pagination > .active > a {
-  color: #fff;
-  background-color: #333;
-  border-color: #333;
-}
-
-.pagination > li > a {
-  color: #333;
-  border-color: #333;
-}
-.pagination > li > a:hover {
-  border-color: #333;
-}
-
-.product {
-  position: relative;
-  margin-bottom: 20px;
-  height: 37vh;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.image-wrapper {
-  width: 100%;
-  height: 37vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.product img {
+.welcome {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
-  width: 100%;
-}
-.product .info {
-  background-color: rgba(0,0,0,0.8);
-  width: 100%;
-  padding: 0 10px;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  height: 60px;
-}
-
-.product .info p {
   color: #fff;
-  font-size: 20px;
-  padding: 10px;
+  font-family: 'Josefin Slab', serif;
+  font-size: 80px;
+  display: block;
+  text-align: center;
+  opacity: 1;
+  animation-name: fadein;
+  animation-duration: 4s;
 }
 
-.arrow-wrapper-right, .arrow-wrapper-left {
-  position: fixed;
-  color: #000;
-  z-index: 2;
-  font-size: 90px;
-  top: 50%;
-  transform: translateY(-50%);
+.touch {
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-family: 'Josefin Slab', serif;
+  font-size: 60px;
+  display: block;
+  text-align: center;
+  animation-name: fadein2;
+  animation-duration: 4s;
 }
 
-.arrow-wrapper-left {
-  left: 0;
+@keyframes fadein {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
-.arrow-wrapper-right {
-  right: 0;
+@keyframes fadein2 {
+  0% {opacity: 0;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
 }
-
-.glyphicon-chevron-left, .glyphicon-chevron-right {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 100%;
-  border: 5px solid #000;
-}*/

@@ -19,6 +19,7 @@ import { AhoyComponent } from './ahoy/ahoy.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { SearchComponent } from './search/search.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AhoyComponent,
     SubCategoriesComponent,
     SearchComponent,
-    NavbarComponent
+    NavbarComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

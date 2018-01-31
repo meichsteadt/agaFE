@@ -16,6 +16,7 @@ declare var ahoy: any;
 export class AppComponent {
   title = 'app';
   category: string = "Homelegance Furniture";
+  time:any = new Date;
   constructor(private _location: Location, private router: Router, private auth: AuthService, private http: HttpClient, private productService: ProductService) {}
 
   ngOnInit() {
@@ -39,6 +40,9 @@ export class AppComponent {
       startOnReady: true
     });
     this.http.post("http://localhost:3000/ahoy/visits", {});
+    setInterval(i => {
+      this.checkTime();
+    }, 1000)
   }
 
   goTo(page) {
@@ -47,5 +51,22 @@ export class AppComponent {
 
   goBack() {
     this._location.back();
+  }
+
+  notHome() {
+    if(this.router.url.split('?')[0] !== '/') {
+      return true;
+    }
+  }
+
+  checkTime() {
+    var now:any = new Date
+    if((now - this.time)/1000 >= 6000) {
+      this.router.navigateByUrl('/?user=' + this.auth.getUser())
+    }
+  }
+
+  setTime() {
+    this.time = new Date;
   }
 }

@@ -35,7 +35,6 @@ export class NavbarComponent implements OnInit {
       })
     })
     this.navSubCategories = categories;
-    console.log(this.navSubCategories)
   }
 
   generateArray(obj) {

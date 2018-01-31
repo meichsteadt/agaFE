@@ -11,11 +11,16 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { AhoyComponent } from './ahoy/ahoy.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { SearchComponent } from './search/search.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'categories',
+    component: CategoriesComponent,
   },
   {
     path: 'products',

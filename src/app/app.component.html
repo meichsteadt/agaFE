@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
-<div style="padding: 10px">
+<app-navbar *ngIf="notHome()"></app-navbar>
+<div style="padding: 10px" (click)="setTime()">
   <router-outlet></router-outlet>
 </div>
