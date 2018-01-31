@@ -61,7 +61,7 @@ export class AppComponent {
 
   checkTime() {
     var now:any = new Date
-    if((now - this.time)/1000 >= 6000) {
+    if((now - this.time)/1000 >= 600) {
       this.router.navigateByUrl('/?user=' + this.auth.getUser())
     }
   }
