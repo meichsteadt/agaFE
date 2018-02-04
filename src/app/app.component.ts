@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProductService } from './product.service';
+import { UserService } from './user.service';
 import 'ahoy.js';
 declare var ahoy: any;
 
@@ -11,13 +12,13 @@ declare var ahoy: any;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ProductService]
+  providers: [ProductService, UserService]
 })
 export class AppComponent {
   title = 'app';
   category: string = "Homelegance Furniture";
   time:any = new Date;
-  constructor(private _location: Location, private router: Router, private auth: AuthService, private http: HttpClient, private productService: ProductService) {}
+  constructor(private _location: Location, private router: Router, private auth: AuthService, private http: HttpClient, private productService: ProductService, private userService: UserService) {}
 
   ngOnInit() {
     let url = document.URL.split("?")[1];
@@ -44,6 +45,9 @@ export class AppComponent {
       setInterval(i => {
         this.checkTime();
       }, 1000)
+    }
+    else {
+      this.router.navigateByUrl('categories')
     }
   }
 

@@ -1,5 +1,5 @@
 
-  <div class="col-xs-6 product-image-wrapper">
+  <div class="col-xs-5 product-image-wrapper">
     <img *ngIf="!multipleImages()" src="{{images[0]}}" class="img-responsive product-image" alt="" data-toggle="modal" data-target="#imageModal">
     <div *ngIf="multipleImages()" id="carousel-example-generic" class="carousel slide" data-interval="0">
       <!-- Indicators -->
@@ -29,7 +29,7 @@
     </form>
     <p id="email-confirmation">Thank you! Your email has been sent.</p>
   </div>
-  <div class="col-xs-6 product-info">
+  <div class="col-xs-7 product-info">
     <h1>{{(product)?.name}}</h1>
     <h3>Product Number: {{(product)?.number}}</h3>
     <p class="product-description">{{(product)?.description}}</p>
@@ -40,12 +40,13 @@
         <tr>
           <th>Item Description</th>
           <th>Dimensions</th>
-          <th>Price</th>
-          <th></th>
+          <th>In Stock?</th>
+          <th colspan="2">Price</th>
         </tr>
         <tr *ngFor="let item of productItems">
           <td>{{item.description}}</td>
           <td>{{item.dimensions}}</td>
+          <td [class]="item.canSellClass()">{{item.canSell()}}</td>
           <td *ngIf="item.price">{{item.price | currency:'USD':true}}</td>
           <td *ngIf="item.price" class="input-field">
             <li class="active" (click)="dropDown($event)">{{item.numberSelected}}</li>

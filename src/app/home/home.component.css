@@ -11,10 +11,10 @@ body {
 
 .splash {
   position: absolute;
-  left: -10px;
+  left: -1%;
   top: 0;
   height: 100%;
-  width: 120%;
+  width: 102%;
   background: url('https://s3-us-west-1.amazonaws.com/homelegance/Images_MidRes_For+Customer+Advertisement/2159-1.jpg');
   background-size: cover;
   background-position: center;

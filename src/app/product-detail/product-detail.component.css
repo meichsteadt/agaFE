@@ -23,14 +23,14 @@ table {
   width: 100%;
 }
 table th {
-  width: 25%;
+  width: 20%;
   font-size: 20px;
   font-weight: bold;
   text-align: left;
 }
 
 td {
-  width: 25%;
+  width: 20%;
   text-align: left;
   font-size: 16px;
 }

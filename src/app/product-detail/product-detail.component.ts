@@ -33,8 +33,9 @@ export class ProductDetailComponent implements OnInit {
       this.getProduct(user);
     });
     this.setTotal();
-    ahoy.trackView();
-    ahoy.trackClicks();
+    if (this.user !== "1") {
+      ahoy.trackView();
+    }
   }
 
   getProduct(user) {
@@ -44,8 +45,8 @@ export class ProductDetailComponent implements OnInit {
         this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
         this.images = i["product"]["images"];
         i["product_items"].forEach(item => {
-          let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0)
-          this.productItems.push(productItem)
+          let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0, item["can_sell"])
+          this.productItems.push(productItem);
         })
       }
     , error => this.catchError(error));

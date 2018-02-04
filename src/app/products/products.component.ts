@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
+import { UserService } from '../user.service';
 import 'ahoy.js';
 declare var ahoy: any;
 
@@ -15,17 +16,19 @@ declare var ahoy: any;
 })
 export class ProductsComponent implements OnInit {
   products;
+  user;
   category: string;
   pagenumber: number = 1;
   pages: number = 0;
   search: boolean = false;
   searchParams: string;
   noProducts: boolean = false;
-  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private productService: ProductService) { }
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private productService: ProductService, private userService: UserService ) { }
 
   ngOnInit() {
     this.closeModal();
     this.category = this.router.url.split('/').pop();
+    this.user = this.userService.getUser();
     this.route.params.subscribe(params => {
       if(params['search']) {
         this.searchParams = params['search']
@@ -111,8 +114,9 @@ export class ProductsComponent implements OnInit {
     else {
       this.getProducts(this.category, number);
     }
-    ahoy.trackView();
-    ahoy.trackClicks();
+    if (this.user !== "1") {
+      ahoy.trackView();
+    }
     localStorage.setItem("pageNumber", this.pagenumber + "");
   }
 

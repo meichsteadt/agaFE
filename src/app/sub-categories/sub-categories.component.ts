@@ -26,8 +26,9 @@ export class SubCategoriesComponent implements OnInit {
       this.category = urlParameters['category'];
     });
     this.setPage(this.pagenumber);
-    ahoy.trackView();
-    ahoy.trackClicks();
+    if (this.user !== "1") {
+      ahoy.trackView();
+    }
   }
 
   linkize(string) {
