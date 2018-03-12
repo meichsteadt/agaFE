@@ -41,7 +41,9 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(this.productId, this.user).subscribe(i =>
       {
         this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
-        this.images = [i["product"]["thumbnail"]];
+        for(var j = 0; j < i["product"]["images"].length; j ++) {
+          this.images.push(i["product"]["images"][j])
+        }
         i["product_items"].forEach(item => {
           let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0, item["can_sell"])
           this.productItems.push(productItem);

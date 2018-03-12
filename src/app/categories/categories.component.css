@@ -122,3 +122,29 @@ header li a:hover {
   border-radius: 100%;
   border: 5px solid #000;
 }*/
+
+.pagination {
+  margin: 0;
+}
+
+.pagination > .active > a {
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
+}
+
+.pagination > li > a {
+  color: #333;
+  border-color: #333;
+}
+.pagination > li > a:hover {
+  border-color: #333;
+}
+
+.carousel {
+  height: 100%;
+}
+
+.carousel-inner {
+  height: 76vh;
+}

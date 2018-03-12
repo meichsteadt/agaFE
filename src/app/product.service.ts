@@ -83,4 +83,8 @@ export class ProductService {
   sendEmail(email, user, productId) {
     return this.http.post(this.url() + "/emails/", {"email_address": email, "product_id": productId, "user_id": user})
   }
+
+  getNewArrivals(user, pageNumber) {
+    return this.http.get(this.url() + "/users/" + user + "/new_arrivals" + "?page_number=" + pageNumber)
+  }
 }

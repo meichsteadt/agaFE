@@ -12,6 +12,7 @@ import { AhoyComponent } from './ahoy/ahoy.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { SearchComponent } from './search/search.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
 
 const appRoutes: Routes = [
   {
@@ -91,6 +92,10 @@ const appRoutes: Routes = [
   {
     path: 'ahoy',
     component: AhoyComponent
+  },
+  {
+    path: 'new-arrivals',
+    component: NewArrivalsComponent
   }
 ];
 

@@ -20,6 +20,7 @@ import { SubCategoriesComponent } from './sub-categories/sub-categories.componen
 import { SearchComponent } from './search/search.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CategoriesComponent } from './categories/categories.component';
     SubCategoriesComponent,
     SearchComponent,
     NavbarComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    NewArrivalsComponent
   ],
   imports: [
     BrowserModule,
