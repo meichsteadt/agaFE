@@ -33,9 +33,7 @@ export class ProductDetailComponent implements OnInit {
       this.getProduct(user);
     });
     this.setTotal();
-    if (this.user !== "1") {
-      ahoy.trackView();
-    }
+    ahoy.trackView();
   }
 
   getProduct(user) {
@@ -43,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(this.productId, this.user).subscribe(i =>
       {
         this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
-        this.images = i["product"]["images"];
+        this.images = [i["product"]["thumbnail"]];
         i["product_items"].forEach(item => {
           let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0, item["can_sell"])
           this.productItems.push(productItem);
@@ -85,7 +83,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   sendEmail(email) {
-    this.http.post("https://homelegance-kiosk.herokuapp.com/emails/", {"email_address": email, "product_id": this.productId, "user_id": this.user}).subscribe(res => console.log(res));
+    this.productService.sendEmail(email, this.user, this.productId).subscribe();
     document.getElementById("email-form").style.display = "none";
     document.getElementById("email-confirmation").style.display = "block";
   }

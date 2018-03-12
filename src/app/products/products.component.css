@@ -52,3 +52,8 @@
   border-radius: 100%;
   border: 5px solid #222;
 }
+
+.carousel {
+  height: 100%;
+  min-height: 66vh;
+}

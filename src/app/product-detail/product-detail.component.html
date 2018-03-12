@@ -4,7 +4,7 @@
     <div *ngIf="multipleImages()" id="carousel-example-generic" class="carousel slide" data-interval="0">
       <!-- Indicators -->
       <ol class="carousel-indicators hidden-xs">
-          <li (click)="setCurrentImage(i)" [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel-example-generic" [attr.data-slide-to]="i"></li>
+          <li [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel-example-generic" [attr.data-slide-to]="i"></li>
       </ol>
       <!-- Wrapper for slides -->
       <div class="carousel-inner">

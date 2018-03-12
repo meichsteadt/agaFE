@@ -15,31 +15,36 @@ declare var ahoy: any;
   providers: [ProductService]
 })
 export class ProductsComponent implements OnInit {
-  products;
+  products = [];
+  productPages = [];
   user;
   category: string;
-  pagenumber: number = 1;
+  pageNumber: number = 1;
   pages: number = 0;
   search: boolean = false;
   searchParams: string;
   noProducts: boolean = false;
+  startingPosition: number = 0;
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private productService: ProductService, private userService: UserService ) { }
 
   ngOnInit() {
     this.closeModal();
     this.category = this.router.url.split('/').pop();
     this.user = this.userService.getUser();
+    ahoy.trackView();
     this.route.params.subscribe(params => {
       if(params['search']) {
         this.searchParams = params['search']
         this.search = true;
         this.checkPageNumber(this.searchParams);
-        this.setPage(this.pagenumber)
+        this.setPage(this.pageNumber);
+        this.getSearchProducts(this.searchParams);
       }
       else {
         params['category']? this.category = params['category'] : false
         this.checkPageNumber(this.category);
-        this.setPage(this.pagenumber);
+        this.setPage(this.pageNumber);
+        this.getAllProducts(this.category);
       }
     });
   }
@@ -54,9 +59,15 @@ export class ProductsComponent implements OnInit {
   }
 
   getSearchProducts(search) {
-    this.productService.search(search, this.auth.getUser(), this.pagenumber).subscribe(response => {
-      this.products = response["products"];
+    this.productService.search(search, this.auth.getUser(), 1).subscribe(response => {
+      this.products = [];
       this.pages = Math.ceil(response["pages"]/6);
+      for(var i = 0; i< this.pages; i ++) {
+        this.products.push([])
+        this.productService.search(search, this.auth.getUser(), i + 1).subscribe(response => {
+          this.products[parseInt(response["page_number"]) - 1] = response["products"]
+        })
+      }
       this.checkProductsLength();
     })
   }
@@ -67,12 +78,13 @@ export class ProductsComponent implements OnInit {
       localStorage.setItem("category", category);
     }
     if(localStorage.getItem("pageNumber")) {
-      this.pagenumber = parseInt(localStorage.getItem("pageNumber"));
+      this.pageNumber = parseInt(localStorage.getItem("pageNumber"));
+      this.startingPosition = this.pageNumber - 1;
     }
   }
 
   getProducts(category, pagenumber) {
-    if(this.router.url.split('/').includes('sub-categories')) {
+    if(this.router.url.split('/')[2] == 'sub-categories') {
       this.productService.getProductsFromSubCategory(category, pagenumber, this.auth.getUser()).subscribe(response => {
         this.products = response["products"];
         this.pages = Math.ceil(response["pages"]/6);
@@ -101,40 +113,34 @@ export class ProductsComponent implements OnInit {
   }
 
   compare(number) {
-    if (number == this.pagenumber) {
-      return "active"
+    if (number === this.pageNumber) {
+      return true
     }
   }
 
   setPage(number) {
-    this.pagenumber = number;
-    if(this.search) {
-      this.getSearchProducts(this.searchParams);
-    }
-    else {
-      this.getProducts(this.category, number);
-    }
+    this.pageNumber = number;
     if (this.user !== "1") {
       ahoy.trackView();
     }
-    localStorage.setItem("pageNumber", this.pagenumber + "");
+    localStorage.setItem("pageNumber", this.pageNumber + "");
   }
 
   nextPage() {
-    if (this.pagenumber == this.pages) {
+    if (this.pageNumber == this.pages) {
       this.setPage(1);
     }
     else {
-      this.setPage(this.pagenumber + 1);
+      this.setPage(this.pageNumber + 1);
     }
   }
 
   previousPage() {
-    if (this.pagenumber == 1) {
+    if (this.pageNumber == 1) {
       this.setPage(this.pages);
     }
     else {
-      this.setPage(this.pagenumber -= 1)
+      this.setPage(this.pageNumber -= 1)
     }
   }
 
@@ -146,6 +152,41 @@ export class ProductsComponent implements OnInit {
       body.removeChild(modal);
     }
   }
+
+  getAllProducts(category) {
+    if(this.router.url.split('/')[2] == 'sub-categories') {
+      this.productService.getProductsFromSubCategory(category, 1, this.auth.getUser()).subscribe(response => {
+        this.pages = Math.ceil(response["pages"]/6);
+        for(var i = 0; i < this.pages; i++) {
+          this.products.push([])
+          this.productService.getProductsFromSubCategory(category, i + 1, this.auth.getUser()).subscribe(response => {
+            this.products[parseInt(response['page_number']) - 1] = response["products"];
+          })
+        }
+      }, error => this.catchError(error));
+    }
+    else {
+      this.productService.getProducts(category, 1, this.auth.getUser()).subscribe(response => {
+        this.pages = Math.ceil(response["pages"]/6);
+        for(var i = 0; i < this.pages; i ++) {
+          this.products.push([]);
+          this.productService.getProducts(category, i + 1, this.auth.getUser()).subscribe(response => {
+            this.products[parseInt(response['page_number']) - 1] = response["products"];
+          })
+        }
+      }, error => this.catchError(error));
+    }
+  }
+
+  active(i) {
+    if(i === this.startingPosition) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
 
   catchError(error) {
     console.log(error)

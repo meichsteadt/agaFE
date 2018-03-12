@@ -1,29 +1,34 @@
-  <div class="arrow-wrapper-left" (click)="previousPage()">
+  <div class="arrow-wrapper-left" data-slide="prev" data-target="#myCarousel" (click)="previousPage()">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
   </div>
-  <div class="arrow-wrapper-right" (click)="nextPage()">
+  <div class="arrow-wrapper-right" data-slide="next" data-target="#myCarousel" (click)="nextPage()">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
   </div>
 <div *ngIf="!noProducts">
-  <div class="products clearfix">
-    <div class="product col-xs-4" *ngFor="let product of products" (click)="goToDetail(product)">
-      <div class="image-wrapper">
-        <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
-        <div class="info">
-          <p>{{product["name"]}}</p>
+  <div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item" [class.active]="active(i)" *ngFor="let page of products; let i = index;" id="page{{i}}">
+        <div class="products clearfix">
+          <div class="product col-xs-4" *ngFor="let product of page" (click)="goToDetail(product)">
+            <div class="image-wrapper">
+              <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
+              <div class="info">
+                <p>{{product["name"]}}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <nav *ngIf="pages > 1" aria-label="Page navigation" class="text-center">
     <ul class="pagination">
-      <li (click)="previousPage()">
+      <li data-slide="prev" data-target="#myCarousel" (click)="previousPage()">
         <a><span aria-hidden="true">&laquo;</span></a>
       </li>
-      <li *ngFor="let pagenumber of createRange(pages)" [ngClass]="compare(pagenumber)" (click)="setPage(pagenumber)">
-        <a>{{pagenumber}}</a>
-      </li>
-      <li (click)="nextPage()">
+      <li *ngFor="let page of products; let i = index;" data-target="#myCarousel" [attr.data-slide-to]="i" [class.active]="compare(i + 1)" (click)="setPage(i + 1)"><a>{{i + 1}}</a></li>
+      <li data-slide="next" data-target="#myCarousel" (click)="nextPage()">
         <a><span aria-hidden="true">&raquo;</span></a>
       </li>
     </ul>

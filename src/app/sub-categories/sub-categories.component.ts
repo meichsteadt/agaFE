@@ -14,9 +14,10 @@ declare var ahoy: any;
 export class SubCategoriesComponent implements OnInit {
   user: string;
   category: string;
-  subCategories;
+  subCategories = [];
   pagenumber: number = 1;
   pages: number;
+  startingPosition: number = 0;
   constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private auth: AuthService) { }
 
   ngOnInit() {
@@ -25,10 +26,8 @@ export class SubCategoriesComponent implements OnInit {
     this.route.params.subscribe((urlParameters) => {
       this.category = urlParameters['category'];
     });
-    this.setPage(this.pagenumber);
-    if (this.user !== "1") {
-      ahoy.trackView();
-    }
+    this.getSubCategories();
+    ahoy.trackView();
   }
 
   linkize(string) {
@@ -51,16 +50,19 @@ export class SubCategoriesComponent implements OnInit {
 
   getSubCategories() {
     this.productService.getSubCategories(this.category, this.pagenumber).subscribe(response => {
-      this.subCategories = response["sub_categories"];
-      if(!this.pages) {
-        this.pages = Math.ceil((response["pages"] + 1) / 6)
+      this.pages = Math.ceil((response["pages"] + 1) / 6)
+      for(var i = 0; i < this.pages; i++) {
+        this.subCategories.push([])
+        this.productService.getSubCategories(this.category, i + 1).subscribe(res => {
+          this.subCategories[parseInt(res["page_number"]) - 1] = res["sub_categories"];
+          console.log(this.subCategories)
+        })
       }
     });
   }
 
   setPage(pagenumber){
     this.pagenumber = pagenumber;
-    this.getSubCategories();
   }
 
   nextPage() {
@@ -93,6 +95,15 @@ export class SubCategoriesComponent implements OnInit {
       arr.push(i)
     }
     return arr;
+  }
+
+  active(i) {
+    if(i === this.startingPosition) {
+      return true
+    }
+    else {
+      return false
+    }
   }
 
   getSubCategoryThumbnails(category) {

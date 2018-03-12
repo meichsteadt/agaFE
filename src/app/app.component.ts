@@ -40,14 +40,14 @@ export class AppComponent {
       useBeacon: false,
       startOnReady: true
     });
-    this.http.post("http://localhost:3000/ahoy/visits", {});
+    this.http.post(this.productService.url() + "/ahoy/visits", {});
     if (this.auth.getUser() === "1") {
       setInterval(i => {
         this.checkTime();
-      }, 1000)
+      }, 60000)
     }
-    else {
-      this.router.navigateByUrl('categories')
+    else if (document.URL.split('/')[3] !== "login") {
+      this.router.navigateByUrl('categories?user=' + user["id"])
     }
   }
 

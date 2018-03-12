@@ -79,4 +79,8 @@ export class ProductService {
     }
     return image;
   }
+
+  sendEmail(email, user, productId) {
+    return this.http.post(this.url() + "/emails/", {"email_address": email, "product_id": productId, "user_id": user})
+  }
 }

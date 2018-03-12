@@ -22,14 +22,12 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
       this.user = this.userService.getUser();
-      this.http.get('https://homelegance-kiosk.herokuapp.com/products/3246').subscribe(response => this.dining = response["product"]["thumbnail"])
-      this.http.get('https://homelegance-kiosk.herokuapp.com/products/3456').subscribe(response => this.bedroom = response["product"]["thumbnail"])
-      this.http.get('https://homelegance-kiosk.herokuapp.com/products/3894').subscribe(response => this.youth = response["product"]["thumbnail"])
-      this.http.get('https://homelegance-kiosk.herokuapp.com/products/3689').subscribe(response => this.seating = response["product"]["thumbnail"])
-      this.http.get('https://homelegance-kiosk.herokuapp.com/products/3941').subscribe(response => this.occasional = response["product"]["thumbnail"])
-      this.http.get('https://homelegance-kiosk.herokuapp.com/products/4205').subscribe(response => this.home = response["product"]["thumbnail"])
-      if (this.user !== "1") {
-        ahoy.trackView();
-      }
+      this.dining = "assets/5510-66.jpg";
+      this.occasional = "assets/5438-30.jpg";
+      this.home = "assets/5099-15.jpg"
+      this.bedroom = "assets/5438.jpg"
+      this.seating = "assets/8327TL.jpg"
+      this.youth = "assets/B1799-1.jpg"
+      ahoy.trackView();
   }
 }

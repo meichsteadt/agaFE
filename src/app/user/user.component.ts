@@ -22,7 +22,6 @@ export class UserComponent implements OnInit {
       this.user = new User(i["user"]["id"], i["user"]["bedroom_mult"], i["user"]["dining_mult"], i["user"]["seating_mult"], i["user"]["youth_mult"], i["user"]["occasional_mult"], i["user"]["home_mult"]);
       this.emails = i["emails"];
     }, error => this.handleError());
-    console.log(this.user)
   }
 
   handleError() {

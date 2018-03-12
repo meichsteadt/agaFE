@@ -1,37 +1,35 @@
 <div class="products clearfix">
-  <div routerLink="/{{category}}" *ngIf="pagenumber == 1" class="col-xs-4 product">
-    <div class="image-wrapper">
-      <img src="{{getSubCategoryThumbnails(category)}}" alt="" class="product-image">
-      <div class="info">
-        <p>All</p>
+  <div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item" [class.active]="active(i)" *ngFor="let page of subCategories; let i = index;" id="page{{i}}">
+        <div routerLink="/{{category}}" *ngIf="pagenumber == 1" class="col-xs-4 product">
+          <div class="image-wrapper">
+            <img src="{{getSubCategoryThumbnails(category)}}" alt="" class="product-image">
+            <div class="info">
+              <p>All</p>
+            </div>
+          </div>
+        </div>
+        <div class="product col-xs-4" *ngFor="let category of page" routerLink="/products/sub-categories/{{category['id']}}">
+          <div class="image-wrapper">
+            <img *ngIf="category['thumbnail']" src="{{category['thumbnail']}}" alt="" class="product-image">
+            <div class="info">
+              <p>{{category["name"]}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="product col-xs-4" *ngFor="let category of subCategories" routerLink="/products/sub-categories/{{category['id']}}">
-    <div class="image-wrapper">
-      <img *ngIf="category['thumbnail']" src="{{category['thumbnail']}}" alt="" class="product-image">
-      <div class="info">
-        <p>{{category["name"]}}</p>
-      </div>
-    </div>
-  </div>
-</div>
-<nav *ngIf="pages > 1" aria-label="Page navigation" class="text-center">
-  <div class="arrow-wrapper-left" (click)="previousPage()">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-  </div>
-  <div class="arrow-wrapper-right" (click)="nextPage()">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-  </div>
-  <ul class="pagination">
-    <li (click)="previousPage()">
-      <a><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    <li *ngFor="let pagenumber of createRange(pages)" [ngClass]="compare(pagenumber)" (click)="setPage(pagenumber)">
-      <a>{{pagenumber}}</a>
-    </li>
-    <li (click)="nextPage()">
-      <a><span aria-hidden="true">&raquo;</span></a>
-    </li>
-  </ul>
-</nav>
+  <nav *ngIf="pages > 1" aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+      <li data-slide="prev" data-target="#myCarousel" (click)="previousPage()">
+        <a><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li *ngFor="let page of subCategories; let i = index;" data-target="#myCarousel" [attr.data-slide-to]="i" [class.active]="compare(i + 1)" (click)="setPage(i + 1)"><a>{{i + 1}}</a></li>
+      <li data-slide="next" data-target="#myCarousel" (click)="nextPage()">
+        <a><span aria-hidden="true">&raquo;</span></a>
+      </li>
+    </ul>
+  </nav>
