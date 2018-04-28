@@ -1,71 +1,76 @@
+<div class="progress">
+    <div class="indeterminate"></div>
+</div>
 
+
+<div class="product-details">
   <div class="col-xs-5 product-image-wrapper">
-    <img src="{{product['thumbnail']}}" class="img-responsive product-image" alt="" data-toggle="modal" data-target="#imageModal">
+    <img src="{{(product)?.thumbnail}}" class="img-responsive product-image" alt="" data-toggle="modal" data-target="#imageModal">
     <!-- <div *ngIf="multipleImages()" id="carousel-example-generic" class="carousel slide" data-interval="0">
-      <ol class="carousel-indicators hidden-xs">
-          <li [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel-example-generic" [attr.data-slide-to]="i"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div *ngFor="let image of images; let i = index" class="item" [class.active]="active(i)">
-            <img class="img-responsive" src="{{image}}" alt="" data-toggle="modal" data-target="#imageModal">
-        </div>
-      </div>
-      <a class="left carousel-control" data-target="#carousel-example-generic" data-slide="prev">
-          <span class="icon-prev"></span>
-      </a>
-      <a class="right carousel-control" data-target="#carousel-example-generic" data-slide="next">
-          <span class="icon-next"></span>
-      </a>
-    </div> -->
+    <ol class="carousel-indicators hidden-xs">
+    <li [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel-example-generic" [attr.data-slide-to]="i"></li>
+  </ol>
+  <div class="carousel-inner">
+  <div *ngFor="let image of images; let i = index" class="item" [class.active]="active(i)">
+  <img class="img-responsive" src="{{image}}" alt="" data-toggle="modal" data-target="#imageModal">
+</div>
+</div>
+<a class="left carousel-control" data-target="#carousel-example-generic" data-slide="prev">
+<span class="icon-prev"></span>
+</a>
+<a class="right carousel-control" data-target="#carousel-example-generic" data-slide="next">
+<span class="icon-next"></span>
+</a>
+</div> -->
 
-    <form id="email-form" class="form-inline">
-      <div class="input-field">
-        <input name="email" type="email" [value]="email" (input)="email = $event.target.value" placeholder="Send To Email">
-        <button (click)="sendEmail(email)" class="btn btn-info btn-lg">Submit</button>
-      </div>
-    </form>
-    <p id="email-confirmation">Thank you! Your email has been sent.</p>
+<form id="email-form" class="form-inline">
+  <div class="input-field">
+    <input name="email" type="email" [value]="email" (input)="email = $event.target.value" placeholder="Send To Email">
+    <button (click)="sendEmail(email)" class="btn btn-info btn-lg">Submit</button>
   </div>
-  <div class="col-xs-7 product-info">
-    <h1>{{(product)?.name}}</h1>
-    <h3>Product Number: {{(product)?.number}}</h3>
-    <p class="product-description">{{(product)?.description}}</p>
-    <hr>
-    <div class="col-xs-12 item-pick">
-      <h2 class="text-center">Pick Your Items</h2>
-      <table>
-        <tr>
-          <th>Item Description</th>
-          <th>Dimensions</th>
-          <th>In Stock?</th>
-          <th colspan="2">Price</th>
-        </tr>
-        <tr *ngFor="let item of productItems">
-          <td>{{item.description}}</td>
-          <td>{{item.dimensions}}</td>
-          <td [class]="item.canSellClass()">{{item.canSell()}}</td>
-          <td *ngIf="item.price">{{item.price | currency:'USD':true}}</td>
-          <td *ngIf="item.price" class="input-field">
-            <li class="active" (click)="dropDown($event)">{{item.numberSelected}}</li>
-            <ul>
-              <li value="0" (click)="selectNumber($event, item)">0</li>
-              <li value="1" (click)="selectNumber($event, item)">1</li>
-              <li value="2" (click)="selectNumber($event, item)">2</li>
-              <li value="3" (click)="selectNumber($event, item)">3</li>
-              <li value="4" (click)="selectNumber($event, item)">4</li>
-              <li value="5" (click)="selectNumber($event, item)">5</li>
-              <li value="6" (click)="selectNumber($event, item)">6</li>
-              <li value="7" (click)="selectNumber($event, item)">7</li>
-              <li value="8" (click)="selectNumber($event, item)">8</li>
-            </ul>
-            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-          </td>
-        </tr>
-      </table>
-      <h2 id="total">Total: {{total | currency:'USD':true}}</h2>
-    </div>
+</form>
+<p id="email-confirmation">Thank you! Your email has been sent to {{email}}.</p>
+</div>
+<div class="col-xs-7 product-info">
+  <h1>{{(product)?.name}}</h1>
+  <h3>Product Number: {{(product)?.number}}</h3>
+  <p class="product-description">{{(product)?.description}}</p>
+  <hr>
+  <div class="col-xs-12 item-pick">
+    <h2 class="text-center">Pick Your Items</h2>
+    <table>
+      <tr>
+        <th>Item Description</th>
+        <th>Dimensions</th>
+        <th>In Stock?</th>
+        <th colspan="2">Price</th>
+      </tr>
+      <tr *ngFor="let item of productItems">
+        <td>{{item.description}}</td>
+        <td>{{item.dimensions}}</td>
+        <td [class]="item.canSellClass()">{{item.canSell()}}</td>
+        <td *ngIf="item.price">{{item.price | currency:'USD':true}}</td>
+        <td *ngIf="item.price" class="input-field">
+          <li class="active" (click)="dropDown($event)">{{item.numberSelected}}</li>
+          <ul>
+            <li value="0" (click)="selectNumber($event, item)">0</li>
+            <li value="1" (click)="selectNumber($event, item)">1</li>
+            <li value="2" (click)="selectNumber($event, item)">2</li>
+            <li value="3" (click)="selectNumber($event, item)">3</li>
+            <li value="4" (click)="selectNumber($event, item)">4</li>
+            <li value="5" (click)="selectNumber($event, item)">5</li>
+            <li value="6" (click)="selectNumber($event, item)">6</li>
+            <li value="7" (click)="selectNumber($event, item)">7</li>
+            <li value="8" (click)="selectNumber($event, item)">8</li>
+          </ul>
+          <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+        </td>
+      </tr>
+    </table>
+    <h2 id="total">Total: {{total | currency:'USD':true}}</h2>
   </div>
-  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
 <!-- <div class="related-products">
   <div class="col-md-3 product">
     <div class="image" style="background: url(<%= product.image %>); background-size: cover; background-position: center center;"></div>
@@ -81,21 +86,22 @@
     <div *ngIf="multipleImages()" id="carousel2" class="carousel slide" data-interval="0">
       <!-- Indicators -->
       <ol class="carousel-indicators hidden-xs">
-          <li [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel2" [attr.data-slide-to]="i"></li>
+        <li [class.active]="active(i)" *ngFor="let image of images; let i = index" data-target="#carousel2" [attr.data-slide-to]="i"></li>
       </ol>
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div *ngFor="let image of images; let i = index" class="item" [class.active]="active(i)">
-            <img class="img-responsive" src="{{image}}" alt="">
+          <img class="img-responsive" src="{{image}}" alt="">
         </div>
       </div>
       <!-- Controls -->
       <a class="left carousel-control" data-target="#carousel2" data-slide="prev">
-          <span class="icon-prev"></span>
+        <span class="icon-prev"></span>
       </a>
       <a class="right carousel-control" data-target="#carousel2" data-slide="next">
-          <span class="icon-next"></span>
+        <span class="icon-next"></span>
       </a>
     </div>
   </div>
+</div>
 </div>

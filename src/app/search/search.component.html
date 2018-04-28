@@ -1,7 +1,7 @@
-<form class="navbar-form navbar-left" #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
-  <div class="input-group">
-    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-    <input name="search" ngModel #search="ngModel" required type="text" id="search" placeholder="Search" autocomplete="off">
-    <button [disabled]="!searchForm.form.valid" type="submit" class="btn btn-info">Submit</button>
+<form class="navbar-form valign-wrapper" #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
+  <div class="input-field valign-wrapper">
+    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+    <input name="search" ngModel #search="ngModel" required type="search" id="search" autocomplete="off">
+    <button [disabled]="!searchForm.form.valid" type="submit" class="btn btn-info">Search</button>
   </div>
 </form>

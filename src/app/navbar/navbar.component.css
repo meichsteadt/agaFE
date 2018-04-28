@@ -1,64 +1,33 @@
 header {
   height: 100px;
   background-color: #FFF;
-  /*background: url('http://www.designbolts.com/wp-content/uploads/2013/12/Free-Christmas-Blue-Background.png');*/
-  background-position: center center;
   position: relative;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
-  display: table;
   width: 100%;
   padding: 0 30px;
 }
 header  h1 {
   margin: 0;
   color: #333;
-  display: table-cell;
-  vertical-align: middle;
   font-size: 45px;
-  position: relative;
   top: 5px;
   width: 442px;
+  white-space: nowrap;
   }
-header ul {
-  position: absolute;
-  z-index: 1;
-  right: 20px;
-  height: 100%;
-  top: 0;
-  }
-header li {
-  height: 100%;
-  position: relative;
+
+header .back-arrow {
+  font-size: 55px;
   width: 100px;
-  display: inline-block;
-}
-header li.active {
-  background-color: #666;
-}
-header li:focus {
-  outline: transparent;
-}
-header li p{
-  color: #fff;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-header .glyphicon-arrow-left {
-  font-size: 30px;
+  text-align: center;
   color: #333;
   z-index: 2;
   display: table-cell;
   vertical-align: middle;
-  padding-right: 20px;
+  padding-right: 0px;
 }
 
-.glyphicon-arrow-left:hover {
+.back-arrow:hover {
   color: #ddd;
 }
 
@@ -69,98 +38,53 @@ img {
   height: 100px;
 }
 
-.search {
-  display: table-cell;
-  vertical-align: middle;
-  padding-right: 20px;
+header div {
+  height: inherit;
 }
 
-.categories{
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 30px;
-  color: #333;
-  position: relative;
-  top: 16px;
-}
-
-.categories p {
-  position: relative;
-  top: -5px;
-  font-style: italic;
-}
-
-.nav-right {
-  float: right;
-  height: 100px;
-  display: table;
-}
-
-.category-menu {
-  position: fixed;
-  top: 0px;
-  height: 100vh;
-  right: -100%;
-  z-index: 3;
-  display: table;
-  width: 500px;
-  background-color: #fff;
-  transition: right .5s ease;
-  border-left: 1px solid #ccc;
-  box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.5);
-}
-
-.category-header {
-  border-bottom: 1px solid #ccc;
-  text-align: center;
-}
-
-.navbar-nav .open .dropdown-menu {
-    position: static;
-    float: none;
-    width: auto;
-    margin-top: 0;
-    background-color: transparent;
-    border: 0;
-    box-shadow: none;
-    padding-left: 15px;
-    font-size: 18px;
-}
-
-.navbar-collapse {
-  padding: 0;
-}
-
-.navbar-nav {
+.pull-right {
   width: 100%;
 }
 
-.navbar-nav > li {
-  float: none;
-  border-bottom: 1px solid #ccc;
-  font-size: 20px;
+.search {
+  display: inline-block;
+  width: 100%;
+  margin: 0 4rem;
+  height: inherit;
 }
 
-.navbar-nav > li > a {
-  padding-left: 30px;
+.categories{
+  color: #333;
+  line-height: 1rem;
+}
+
+.sidenav-trigger {
+  align-self: flex-end;
   color: #333;
 }
 
-.overlay {
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 0.4;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 2;
+.categories p {
+  font-style: italic;
+  position: relative;
+  font-size: 14px;
+  margin: 0;
+  align-self: flex-start;
 }
 
-.close {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  font-size: 36px;
+.categories .valign-wrapper {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.collapsible {
+  font-size: 1.25rem;
+}
+
+.collapsible-header {
+  border-bottom: 1px solid #ddd;
+  min-height: 49px;
+}
+
+.collapsible-body {
+  padding: 0 30px;
 }

@@ -1,15 +1,16 @@
-.navbar-form {
-  display: table-cell;
-  vertical-align: middle;
+form {
+  height: 100%;
+}
+
+.input-field {
+  flex-grow: 1;
+  align-self: center;
+  margin: 0;
 }
 
 input {
-  border: none;
-  border-radius: none;
-  height: 50px;
-  border-bottom: 1px solid #ccc;
-  font-size: 18px;
-  padding: 10px;
+  padding-left: 2rem !important;
+  width: calc(100% - 2rem) !important;
 }
 
 .input-group-addon {
@@ -27,7 +28,7 @@ input {
 }
 
 button {
-  margin-left: 10px;
+  margin-left: 1rem;
 }
 
 .modal-header {

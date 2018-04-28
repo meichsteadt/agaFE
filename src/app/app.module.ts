@@ -15,7 +15,6 @@ import { UserGuardService } from './user-guard.service';
 import { AuthService } from './auth.service';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { AhoyComponent } from './ahoy/ahoy.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { SearchComponent } from './search/search.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -31,7 +30,6 @@ import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
     LoginComponent,
     UserComponent,
     UserLoginComponent,
-    AhoyComponent,
     SubCategoriesComponent,
     SearchComponent,
     NavbarComponent,

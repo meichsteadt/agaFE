@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../user.service';
-import 'ahoy.js';
-declare var ahoy: any;
+
+declare var $: any;
+declare var M: any;
 
 @Component({
   selector: 'app-categories',
@@ -20,8 +21,12 @@ export class CategoriesComponent implements OnInit {
   user;
   newArrivals;
   constructor(private http: HttpClient, private userService: UserService) { }
-  pagenumber: number = 1;
   ngOnInit() {
+
+    $(function() {
+      $('.sidenav').sidenav('close');
+    })
+
       this.user = this.userService.getUser();
       this.dining = "assets/5510-66.jpg";
       this.occasional = "assets/5438-30.jpg";
@@ -30,37 +35,10 @@ export class CategoriesComponent implements OnInit {
       this.seating = "assets/8327TL.jpg"
       this.youth = "assets/B1799-1.jpg"
       this.newArrivals = "assets/1834.jpg"
-      ahoy.trackView();
-  }
 
-  compare(n) {
-    if(n === this.pagenumber) {
-      return true
-    }
-    else {
-      return false
-    }
-  }
-
-  nextPage() {
-    if (this.pagenumber == 2) {
-      this.setPage(1);
-    }
-    else {
-      this.setPage(2);
-    }
-  }
-
-  previousPage() {
-    if (this.pagenumber == 1) {
-      this.setPage(2);
-    }
-    else {
-      this.setPage(1)
-    }
-  }
-
-  setPage(n) {
-    this.pagenumber = n;
+      $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        indicators: true
+      });
   }
 }

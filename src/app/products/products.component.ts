@@ -1,12 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Product } from '../product.model';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
-import 'ahoy.js';
-declare var ahoy: any;
+
+declare var $: any;
+declare var M: any;
+
 
 @Component({
   selector: 'app-products',
@@ -19,19 +21,24 @@ export class ProductsComponent implements OnInit {
   productPages = [];
   user;
   category: string;
-  pageNumber: number = 1;
+  pageNumber: number = 0;
+  previousPageNumber: number = null;
   pages: number = 0;
   search: boolean = false;
   searchParams: string;
   noProducts: boolean = false;
   startingPosition: number = 0;
+  displayed: Number[] = [0, 1, 2];
+  timesLooped:number = 0;
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private productService: ProductService, private userService: UserService ) { }
 
   ngOnInit() {
-    this.closeModal();
-    this.category = this.router.url.split('/').pop();
+    $(function() {
+      $('.sidenav').sidenav('close');
+    })
+
+    this.category = window.location.pathname.split('/').pop();
     this.user = this.userService.getUser();
-    ahoy.trackView();
     this.route.params.subscribe(params => {
       if(params['search']) {
         this.searchParams = params['search']
@@ -74,17 +81,17 @@ export class ProductsComponent implements OnInit {
 
   checkPageNumber(category) {
     if(category !== localStorage.getItem("category")) {
-      localStorage.setItem("pageNumber", "1")
+      localStorage.setItem("pageNumber", "0")
       localStorage.setItem("category", category);
     }
     if(localStorage.getItem("pageNumber")) {
       this.pageNumber = parseInt(localStorage.getItem("pageNumber"));
-      this.startingPosition = this.pageNumber - 1;
+      this.startingPosition = this.pageNumber;
     }
   }
 
   getProducts(category, pagenumber) {
-    if(this.router.url.split('/')[2] == 'sub-categories') {
+    if(window.location.pathname.split('/')[2] == 'sub-categories') {
       this.productService.getProductsFromSubCategory(category, pagenumber, this.auth.getUser()).subscribe(response => {
         this.products = response["products"];
         this.pages = Math.ceil(response["pages"]/6);
@@ -98,6 +105,8 @@ export class ProductsComponent implements OnInit {
         this.pages = Math.ceil(i["length"]/6);
       }, error => this.catchError(error));
     }
+
+    this.initCarousel();
   }
 
   goToDetail(clickedProduct) {
@@ -119,10 +128,8 @@ export class ProductsComponent implements OnInit {
   }
 
   setPage(number) {
+    this.previousPageNumber = this.pageNumber;
     this.pageNumber = number;
-    if (this.user !== "1") {
-      ahoy.trackView();
-    }
     localStorage.setItem("pageNumber", this.pageNumber + "");
   }
 
@@ -154,13 +161,19 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProducts(category) {
-    if(this.router.url.split('/')[2] == 'sub-categories') {
+    if(window.location.pathname.split('/')[2] == 'sub-categories') {
       this.productService.getProductsFromSubCategory(category, 1, this.auth.getUser()).subscribe(response => {
         this.pages = Math.ceil(response["pages"]/6);
         for(var i = 0; i < this.pages; i++) {
           this.products.push([])
           this.productService.getProductsFromSubCategory(category, i + 1, this.auth.getUser()).subscribe(response => {
             this.products[parseInt(response['page_number']) - 1] = response["products"];
+            if(this.timesLooped === this.pages - 1) {
+              this.initCarousel();
+            }
+            else {
+              this.timesLooped++;
+            }
           })
         }
       }, error => this.catchError(error));
@@ -172,21 +185,61 @@ export class ProductsComponent implements OnInit {
           this.products.push([]);
           this.productService.getProducts(category, i + 1, this.auth.getUser()).subscribe(response => {
             this.products[parseInt(response['page_number']) - 1] = response["products"];
+            if(this.timesLooped === this.pages - 1) {
+              this.initCarousel();
+            }
+            else {
+              this.timesLooped++;
+            }
           })
         }
       }, error => this.catchError(error));
     }
   }
 
-  active(i) {
-    if(i === this.startingPosition) {
-      return true
+  shouldDisplay(i) {
+    if(
+      i === this.pageNumber ||
+      i === this.pageNumber + 1 ||
+      i === this.pageNumber + 2 ||
+      this.displayed.includes(i) ||
+      i === (this.pages + this.pageNumber) ||
+      i === (this.pages + this.pageNumber - 1)
+    ) {
+      if(!this.displayed.includes(i)) {
+        this.displayed.push(i);
+      }
+      return true;
     }
     else {
       return false
     }
   }
 
+  initCarousel() {
+    $(document).ready(doc => {
+      $('.carousel-inner').remove()
+      $('.indicators').remove()
+      var instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+      if(instance) {
+        instance.destroy();
+      }
+      var elem = document.querySelector('.carousel');
+      var new_instance = M.Carousel.init(elem, {
+        indicators: true,
+        fullWidth: true,
+        numVisible: this.pages,
+        duration: 0
+      })
+      new_instance.set(this.startingPosition)
+      new_instance.options.onCycleTo = (i => {
+        this.setPage(new_instance.center);
+      })
+      setTimeout(time => {
+        new_instance.options.duration = 200;
+      }, 200)
+    })
+  }
 
   catchError(error) {
     console.log(error)

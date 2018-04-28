@@ -29,17 +29,8 @@ export class AppComponent {
     }
     localStorage.removeItem("pageNumber")
 
-    ahoy.reset();
-    ahoy.configure({
-      urlPrefix: this.productService.url(),
-      visitsUrl: "/ahoy/visits",
-      eventsUrl: "/ahoy/events",
-      cookieDomain: null,
-      page: null,
-      platform: "Web",
-      useBeacon: false,
-      startOnReady: true
-    });
+    // this.ahoy();
+
     this.http.post(this.productService.url() + "/ahoy/visits", {});
     if (this.auth.getUser() === "1") {
       setInterval(i => {
@@ -74,5 +65,19 @@ export class AppComponent {
 
   setTime() {
     this.time = new Date;
+  }
+
+  ahoy() {
+    ahoy.reset();
+    ahoy.configure({
+      urlPrefix: this.productService.url(),
+      visitsUrl: "/ahoy/visits",
+      eventsUrl: "/ahoy/events",
+      cookieDomain: null,
+      page: null,
+      platform: "Web",
+      useBeacon: false,
+      startOnReady: true
+    });
   }
 }

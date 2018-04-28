@@ -1,4 +1,11 @@
-<div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false">
+<div class="arrow-wrapper-left" data-slide="prev" data-target="#myCarousel" (click)="previousPage()">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+</div>
+<div class="arrow-wrapper-right" data-slide="next" data-target="#myCarousel" (click)="nextPage()">
+  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+</div>
+
+<div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item" [class.active]="active(i)" *ngFor="let page of products; let i = index;" id="page{{i}}">

@@ -3,6 +3,10 @@ import { Location } from '@angular/common';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 
+
+import 'jquery';
+declare var $: any;
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,6 +19,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.getSubCategories();
+    $(function() {
+      $('.sidenav').sidenav({edge: 'right'});
+      $('.collapsible').collapsible();
+    })
   }
 
   goBack() {

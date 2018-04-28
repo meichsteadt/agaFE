@@ -8,7 +8,6 @@ import { UserGuardService } from './user-guard.service';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { AhoyComponent } from './ahoy/ahoy.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
 import { SearchComponent } from './search/search.component';
 import { CategoriesComponent } from './categories/categories.component';
@@ -74,10 +73,6 @@ const appRoutes: Routes = [
     component: UserLoginComponent
   },
   {
-    path: 'ahoy/events',
-    component: AhoyComponent
-  },
-  {
     path: 'sub-categories/:category',
     component: SubCategoriesComponent
   },
@@ -90,13 +85,10 @@ const appRoutes: Routes = [
     component: ProductsComponent
   },
   {
-    path: 'ahoy',
-    component: AhoyComponent
-  },
-  {
     path: 'new-arrivals',
     component: NewArrivalsComponent
   }
 ];
+
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

@@ -1,16 +1,32 @@
-<header>
-  <span (click)="goBack()" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+<header class="valign-wrapper">
+  <i (click)="goBack()" class="back-arrow material-icons">arrow_back</i>
   <h1 routerLink="/categories" routerLinkActive="active">Homelegance Furniture</h1>
-  <div class="nav-right">
-    <app-search class="search"></app-search>
-    <div class="categories text-center">
-      <span (click)="openNav()" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-      <p style="font-size: 14px;">Categories</p>
+  <app-search class="search"></app-search>
+  <div class="categories center-align">
+    <div class="valign-wrapper">
+      <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons small">menu</i></a>
+      <p>Categories</p>
     </div>
   </div>
 </header>
 
-<div id="nav-bar" class="category-menu">
+<ul id="slide-out" class="sidenav">
+  <li><h2 class="center-align">Categories</h2></li>
+  <ul class="collapsible">
+    <li *ngFor="let category of generateArray(navSubCategories)">
+      <div class="collapsible-header">{{category[0] | titlecase}} <i class="material-icons">arrow_drop_down</i></div>
+      <div class="collapsible-body">
+        <ul>
+          <li routerLink="{{category[0]}}"><span>All</span></li>
+          <li *ngFor="let sub of category[1]" (click)="goTo(sub['id'])"><span>{{sub["name"]}}</span></li>
+        </ul>
+      </div>
+    </li>
+    <li routerLink="occasional" class="valign-wrapper" style="padding-left: 16px;">Occasional</li>
+  </ul>
+</ul>
+
+<!-- <div id="nav-bar" class="category-menu">
   <div class="category-header">
     <h2>Categories</h2>
     <button (click)="closeNav()" type="button" class="close">&times;</button>
@@ -26,9 +42,9 @@
       </li>
       <li (click)="closeNav()" routerLink="occasional"><a>Occasional</a></li>
     </ul>
-  </div><!-- /.navbar-collapse -->
+  </div>
   <ul style="list-style: none;display: none;">
   </ul>
-</div>
+</div> -->
 
 <div (click)="closeNav()" id="overlay" class="overlay"></div>

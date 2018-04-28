@@ -1,5 +1,5 @@
 <div class="products clearfix">
-  <div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false">
+  <div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item" [class.active]="active(i)" *ngFor="let page of subCategories; let i = index;" id="page{{i}}">

@@ -1,73 +1,74 @@
-<div id="category_carousel" class="carousel slide products" data-ride="carousel" data-interval="false">
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active" id="page1">
-      <div class="products clearfix">
-        <div class="col-xs-4 product" routerLink="/sub-categories/dining" routerLinkActive="active">
+<div class="products">
+  <div class="carousel carousel-slider center">
+    <!-- <div class="carousel-fixed-item center">
+    </div> -->
+    <div class="carousel-item" href="#one!">
+      <div class="row">
+        <div class="col s4 product" routerLink="/sub-categories/dining" routerLinkActive="active">
           <div class="image-wrapper">
             <img src="{{dining}}">
-            <div class="info">
-              <p>Dining</p>
+            <div class="info valign-wrapper">
+              <h5 class="flow-text truncate">Dining</h5>
             </div>
           </div>
         </div>
-        <div class="col-xs-4 product" routerLink="/occasional" routerLinkActive="active">
+        <div class="col s4 product" routerLink="/occasional" routerLinkActive="active">
           <div class="image-wrapper">
             <img src="{{occasional}}">
-            <div class="info">
-              <p>Occasional</p>
+            <div class="info valign-wrapper">
+              <h5 class="flow-text truncate">Occasional</h5>
             </div>
           </div>
         </div>
-        <div class="col-xs-4 product" routerLink="/sub-categories/home" routerLinkActive="active">
+        <div class="col s4 product" routerLink="/sub-categories/home" routerLinkActive="active">
           <div class="image-wrapper">
             <img src="{{home}}">
-            <div class="info">
-              <p>Home</p>
+            <div class="info valign-wrapper">
+              <h5 class="flow-text truncate">Home</h5>
             </div>
           </div>
         </div>
-        <div class="col-xs-4 product" routerLink="/sub-categories/bedroom" routerLinkActive="active">
+        <div class="col s4 product" routerLink="/sub-categories/bedroom" routerLinkActive="active">
           <div class="image-wrapper">
             <img src="{{bedroom}}">
-            <div class="info">
-              <p>Bedroom</p>
+            <div class="info valign-wrapper">
+              <h5 class="flow-text truncate">Bedroom</h5>
             </div>
           </div>
         </div>
-        <div class="col-xs-4 product" routerLink="/sub-categories/seating" routerLinkActive="active">
+        <div class="col s4 product" routerLink="/sub-categories/seating" routerLinkActive="active">
           <div class="image-wrapper">
             <img src="{{seating}}">
-            <div class="info">
-              <p>Seating</p>
+            <div class="info valign-wrapper">
+              <h5 class="flow-text truncate">Seating</h5>
             </div>
           </div>
         </div>
-        <div class="col-xs-4 product" routerLink="/sub-categories/youth" routerLinkActive="active">
+        <div class="col s4 product" routerLink="/sub-categories/youth" routerLinkActive="active">
           <div class="image-wrapper">
             <img src="{{youth}}">
-            <div class="info">
-              <p>Youth</p>
+            <div class="info valign-wrapper">
+              <h5 class="flow-text truncate">Youth</h5>
             </div>
           </div>
         </div>
-      </div>
     </div>
-
-
-  <div class="item" id="page2">
-    <div class="col-xs-4 product" routerLink="/new-arrivals" routerLinkActive="active">
-      <div class="image-wrapper">
-        <img src="{{newArrivals}}">
-        <div class="info">
-          <p>New Arrivals</p>
+  </div>
+  <div class="carousel-item" href="#two!">
+    <div class="row">
+      <div class="col s4 product" routerLink="/new-arrivals" routerLinkActive="active">
+        <div class="image-wrapper">
+          <img src="{{newArrivals}}">
+          <div class="info valign-wrapper">
+            <h5 class="flow-text truncate">New Arrivals</h5>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<nav aria-label="Page navigation" class="text-center">
+<!-- <nav aria-label="Page navigation" class="text-center">
   <ul class="pagination">
     <li data-slide="prev" data-target="#category_carousel" (click)="previousPage()">
       <a><span aria-hidden="true">&laquo;</span></a>
@@ -78,4 +79,4 @@
       <a><span aria-hidden="true">&raquo;</span></a>
     </li>
   </ul>
-</nav>
+</nav> -->

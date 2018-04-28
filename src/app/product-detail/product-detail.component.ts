@@ -8,6 +8,8 @@ import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import 'ahoy.js';
 declare var ahoy: any;
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -23,9 +25,13 @@ export class ProductDetailComponent implements OnInit {
   images: String[] = [];
   currentImage: number = 0;
   user: string;
+  ready: boolean = false;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService, private productService: ProductService) { }
 
   ngOnInit() {
+    $(document).ready(j => {
+      this.isReady();
+    })
     let user = this.auth.getUser();
     this.user = user;
     this.route.params.subscribe((urlParameters) => {
@@ -33,7 +39,7 @@ export class ProductDetailComponent implements OnInit {
       this.getProduct(user);
     });
     this.setTotal();
-    ahoy.trackView();
+    // ahoy.trackView();
   }
 
   getProduct(user) {
@@ -115,6 +121,16 @@ export class ProductDetailComponent implements OnInit {
   }
 
   catchError(error) {
-    this.auth.resetToken();
+    // this.auth.resetToken();
   }
+
+  isReady() {
+    var imgs = $('img');
+    for(var i = 0; i < imgs.length; i++) {
+
+    }
+    $('.product-details').show();
+    $('.progress').hide();
+  }
+
 }
