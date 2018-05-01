@@ -1,6 +1,7 @@
 <div class="row">
     <div class="product-details col l5 xl5">
-    <img src="{{images[0]}}" (click)="openModal()" class="z-depth-3" width="100%">
+    <img src="{{product?.thumbnail}}" (click)="openModal()" class="z-depth-3 responsive-img thumbnail product-image">
+    <img src="{{images[0]}}" (click)="openModal()" class="z-depth-3 responsive-img img-large product-image">
 
       <div class="valign-wrapper">
         <form id="email-form">

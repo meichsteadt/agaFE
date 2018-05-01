@@ -48,7 +48,7 @@ export class ProductDetailComponent implements OnInit {
     this.productItems = [];
     this.productService.getProduct(this.productId, this.user).subscribe(i =>
       {
-        this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
+        this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["thumbnail"]);
         for(var j = 0; j < i["product"]["images"].length; j ++) {
           this.images.push(i["product"]["images"][j]);
         }
@@ -63,9 +63,20 @@ export class ProductDetailComponent implements OnInit {
   dropDown(event, item) {
     let element = event.srcElement.parentElement.children[1];
     element.className = "active";
+    // console.log(element.getClientRects()[0]['height'], element.getClientRects()[0]['top'], window.outerHeight)
+    if(element.getClientRects()[0]['bottom'] - 50 >  window.outerHeight) {
+      element.style.bottom = "20px";
+      element.style.top = null;
+    }
+    else {
+      element.style.top = "20px";
+      element.style.bottom = null;
+    }
 
     function clickEvent() {
       element.className = "";
+      element.style.bottom = null;
+      element.style.top = null;
       document.body.removeEventListener("click", clickEvent);
     }
 
@@ -127,7 +138,7 @@ export class ProductDetailComponent implements OnInit {
       var elem = document.querySelector('.carousel');
       var currentInstance = M.Carousel.getInstance(elem);
       if(!currentInstance) {
-        var options = {fullWidth: true, indicators: true, noWrap: true}
+        var options = {fullWidth: true, indicators: true}
         var instance = M.Carousel.init(elem, options);
       }
     })

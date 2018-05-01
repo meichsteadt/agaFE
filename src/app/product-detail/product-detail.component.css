@@ -1,7 +1,6 @@
 .product-image {
   margin: 0 auto;
   display: block;
-  width: 100%;
 }
 
 .product-info h1 {
@@ -72,7 +71,7 @@ td {
 .input-field ul.active {
   box-shadow: 1px 1px 10px rgba(0,0,0,0.5), 1px -1px 10px rgba(0,0,0,0.5);
   display: block;
-  bottom: 0;
+  /* top: 0; */
 }
 
 .input-field li {
@@ -97,7 +96,9 @@ td {
 }
 
 #email-form {
-  margin-top: 50px;
+  margin: 50px auto;
+  width: 750px;
+  max-width: 100%;
 }
 
 #email-form .input-field {
@@ -106,7 +107,7 @@ td {
 
 #email-form input{
   min-width: 300px;
-  width: calc(60% - 90px);
+  width: calc(100% - 100px);
   margin: 0 auto;
   height: 50px;
   border: none;
@@ -145,4 +146,44 @@ td {
 
 .modal-content {
   height: 100%;
+}
+
+.img-large {
+  display: none;
+}
+
+.carousel-item.active {
+  /* transform: translateX(0px) translateX(0px) translateX(0px) !important; */
+}
+
+
+@media screen and (min-width: 2500px) {
+  .thumbnail {
+    display: none;
+  }
+  .img-large {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 3500px) {
+  .product-info h1 {
+    font-size: 4.6em;
+  }
+
+  .product-info h3 {
+    font-size: 3.1em;
+  }
+
+  .product-info p {
+    font-size: 2.6rem;
+  }
+
+  table th {
+    font-size: 1.6rem;
+  }
+
+  td {
+    font-size: 1.6rem;
+  }
 }

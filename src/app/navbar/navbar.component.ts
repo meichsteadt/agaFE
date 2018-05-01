@@ -98,8 +98,10 @@ export class NavbarComponent implements OnInit {
 
   destroyModal() {
     var elem = document.querySelector('.modal');
-    var instance = M.Modal.getInstance(elem);
-    instance.destroy();
+    if(elem) {
+      var instance = M.Modal.getInstance(elem);
+      instance.destroy();
+    }
   }
 
   initModal() {

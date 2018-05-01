@@ -42,6 +42,11 @@ header div {
   height: inherit;
 }
 
+.sidenav {
+  width: 20%;
+  min-width: 300px;
+}
+
 .pull-right {
   width: 100%;
 }
@@ -81,6 +86,10 @@ header div {
   font-size: 1.25rem;
 }
 
+.collapsible .occasional {
+  padding-left: 16px;
+}
+
 .collapsible-header {
   border-bottom: 1px solid #ddd;
   min-height: 49px;
@@ -94,5 +103,47 @@ header div {
   .search {
     margin-right: 10rem;
     margin-left: auto;
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  .collapsible {
+    font-size: 2.25rem;
+  }
+
+  .collapsible-body {
+    padding: 0 6%;
+  }
+
+  header {
+    height: calc((1/22) * 100vw);
+    padding: 0 2%;
+  }
+
+  header  h1 {
+    font-size: 4.4rem;
+  }
+
+  header i {
+    font-size: 3.2rem !important;
+  }
+
+  .categories p {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 3300px) {
+  header i {
+    font-size: 4.4rem !important;
+  }
+
+  .categories p {
+    font-size: 2.25rem;
+  }
+
+  .collapsible li, .collapsible .occasional {
+    font-size: 3.2rem;
+    padding: 2% 2%;
   }
 }
