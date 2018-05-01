@@ -1,54 +1,27 @@
-.glyphicon-arrow-left {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 30px;
-  color: #fff;
-  z-index: 2;
-}
-.glyphicon-arrow-left:hover {
-  color: #ddd;
-}
-
-.pagination {
-  margin: 0;
-}
-
-.pagination > .active > a {
-  color: #fff;
-  background-color: #333;
-  border-color: #333;
-}
-
-.pagination > li > a {
-  color: #333;
-  border-color: #333;
-}
-.pagination > li > a:hover {
-  border-color: #333;
-}
-
 .arrow-wrapper-right, .arrow-wrapper-left {
-  position: fixed;
+  position: absolute;
   color: #222;
   z-index: 2;
-  font-size: 90px;
-  top: 50%;
+  top: calc(50% - 33px);
   transform: translateY(-50%);
 }
 
 .arrow-wrapper-left {
-  left: 0;
+  left: -10px;
 }
 
 .arrow-wrapper-right {
-  right: 0;
+  right: -10px;
 }
 
-.glyphicon-chevron-left, .glyphicon-chevron-right {
+i {
+  font-size: 4rem;
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 100%;
   border: 5px solid #222;
+}
+
+.carousel.carousel-slider, .carousel-item {
+  min-height: 76vh;
 }

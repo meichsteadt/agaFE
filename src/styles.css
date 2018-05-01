@@ -12,6 +12,8 @@ h1, h2, h3, h4, .h1, .h2, .h3, .h4 {
 .products {
   height: 76vh;
   min-height: 76vh;
+  position: relative;
+  width: calc(100vw - 20px);
 }
 
 .product {

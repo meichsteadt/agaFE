@@ -1,7 +1,11 @@
 <div class="products">
+  <div class="arrow-wrapper-left valign-wrapper" (click)="previousPage()">
+    <i class="material-icons">chevron_left</i>
+  </div>
+  <div class="arrow-wrapper-right" (click)="nextPage()">
+    <i class="material-icons">chevron_right</i>
+  </div>
   <div class="carousel carousel-slider center">
-    <!-- <div class="carousel-fixed-item center">
-    </div> -->
     <div class="carousel-item" href="#one!">
       <div class="row">
         <div class="col s4 product" routerLink="/sub-categories/dining" routerLinkActive="active">
@@ -67,16 +71,3 @@
     </div>
   </div>
 </div>
-
-<!-- <nav aria-label="Page navigation" class="text-center">
-  <ul class="pagination">
-    <li data-slide="prev" data-target="#category_carousel" (click)="previousPage()">
-      <a><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    <li [class.active]="compare(1)" (click)="setPage(1)" data-target="#category_carousel" data-slide-to="0"><a>1</a></li>
-    <li [class.active]="compare(2)" (click)="setPage(2)" data-target="#category_carousel" data-slide-to="1"><a>2</a></li>
-    <li data-slide="next" data-target="#category_carousel" (click)="nextPage()">
-      <a><span aria-hidden="true">&raquo;</span></a>
-    </li>
-  </ul>
-</nav> -->

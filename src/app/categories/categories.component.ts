@@ -41,4 +41,12 @@ export class CategoriesComponent implements OnInit {
         indicators: true
       });
   }
+
+  nextPage() {
+    $('.carousel').carousel('next')
+  }
+
+  previousPage() {
+    $('.carousel').carousel('prev')
+  }
 }

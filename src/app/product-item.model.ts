@@ -5,7 +5,7 @@ export class ProductItem {
     if (this.canSellQty === 0) {
       return "Out of stock"
     }
-    else if (this.canSellQty  < 20 ) {
+    else if (this.canSellQty  < 10 ) {
       return "Low stock"
     }
     else {

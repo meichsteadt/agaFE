@@ -49,6 +49,7 @@ header div {
 .search {
   display: inline-block;
   width: 100%;
+  max-width: 700px;
   margin: 0 4rem;
   height: inherit;
 }
@@ -87,4 +88,11 @@ header div {
 
 .collapsible-body {
   padding: 0 30px;
+}
+
+@media screen and (min-width: 1500px) {
+  .search {
+    margin-right: 10rem;
+    margin-left: auto;
+  }
 }

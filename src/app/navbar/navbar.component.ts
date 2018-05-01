@@ -3,9 +3,8 @@ import { Location } from '@angular/common';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 
-
-import 'jquery';
 declare var $: any;
+declare var M: any;
 
 @Component({
   selector: 'app-navbar',
@@ -19,8 +18,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.getSubCategories();
-    $(function() {
-      $('.sidenav').sidenav({edge: 'right'});
+    $(i => {
+      $('.sidenav').sidenav({edge: 'right', onCloseStart: this.initModal, onOpenStart: this.destroyModal});
       $('.collapsible').collapsible();
     })
   }
@@ -95,5 +94,16 @@ export class NavbarComponent implements OnInit {
     else {
       return false
     }
+  }
+
+  destroyModal() {
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.getInstance(elem);
+    instance.destroy();
+  }
+
+  initModal() {
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.init(elem, {endingTop: "1%"});
   }
 }

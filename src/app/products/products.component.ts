@@ -73,6 +73,12 @@ export class ProductsComponent implements OnInit {
         this.products.push([])
         this.productService.search(search, this.auth.getUser(), i + 1).subscribe(response => {
           this.products[parseInt(response["page_number"]) - 1] = response["products"]
+          if(this.timesLooped === this.pages - 1) {
+            this.initCarousel();
+          }
+          else {
+            this.timesLooped++;
+          }
         })
       }
       this.checkProductsLength();
@@ -134,6 +140,7 @@ export class ProductsComponent implements OnInit {
   }
 
   nextPage() {
+    $('.carousel').carousel('next')
     if (this.pageNumber == this.pages) {
       this.setPage(1);
     }
@@ -143,6 +150,7 @@ export class ProductsComponent implements OnInit {
   }
 
   previousPage() {
+    $('.carousel').carousel('prev')
     if (this.pageNumber == 1) {
       this.setPage(this.pages);
     }

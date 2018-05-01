@@ -3,10 +3,9 @@ import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import 'jquery'
-import * as carousel from 'bootstrap/js/carousel.js';
-declare var ahoy: any;
 declare var $: any;
+declare var M: any;
+
 
 @Component({
   selector: 'app-sub-categories',
@@ -21,6 +20,7 @@ export class SubCategoriesComponent implements OnInit {
   pagenumber: number = 1;
   pages: number;
   startingPosition: number = 0;
+  timesLooped:number = 0;
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private auth: AuthService) { }
@@ -59,6 +59,12 @@ export class SubCategoriesComponent implements OnInit {
         this.subCategories.push([])
         this.productService.getSubCategories(this.category, i + 1).subscribe(res => {
           this.subCategories[parseInt(res["page_number"]) - 1] = res["sub_categories"];
+          if(this.timesLooped === this.pages - 1) {
+            this.initCarousel();
+          }
+          else {
+            this.timesLooped++;
+          }
         })
       }
     });
@@ -69,21 +75,11 @@ export class SubCategoriesComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.pagenumber == this.pages) {
-      this.setPage(1);
-    }
-    else {
-      this.setPage(this.pagenumber + 1);
-    }
+    $('.carousel').carousel('next')
   }
 
   previousPage() {
-    if (this.pagenumber == 1) {
-      this.setPage(this.pages);
-    }
-    else {
-      this.setPage(this.pagenumber -= 1)
-    }
+    $('.carousel').carousel('prev')
   }
 
   compare(number) {
@@ -113,30 +109,28 @@ export class SubCategoriesComponent implements OnInit {
     return this.productService.getSubCategoryThumbnails(category)
   }
 
-  swipe(e: TouchEvent, when: string): void {
-    const coord: [number, number] = [e.changedTouches[0].pageX, e.changedTouches[0].pageY];
-    const time = new Date().getTime();
-
-    if (when === 'start') {
-      this.swipeCoord = coord;
-      this.swipeTime = time;
-    }
-
-    else if (when === 'end') {
-      const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
-      const duration = time - this.swipeTime;
-
-      if (duration < 1000 && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) {
-        const swipe = direction[0] < 0 ? 'next' : 'previous';
-        if(swipe === "next") {
-          this.nextPage();
-          $('#myCarousel').carousel('next');
-        }
-        else {
-          this.previousPage();
-          $('#myCarousel').carousel('prev');
-        }
+  initCarousel() {
+    $(document).ready(doc => {
+      $('.carousel-inner').remove()
+      $('.indicators').remove()
+      var instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+      if(instance) {
+        instance.destroy();
       }
-    }
+      var elem = document.querySelector('.carousel');
+      var new_instance = M.Carousel.init(elem, {
+        indicators: true,
+        fullWidth: true,
+        numVisible: this.pages,
+        duration: 0
+      })
+      new_instance.set(this.startingPosition)
+      new_instance.options.onCycleTo = (i => {
+        this.setPage(new_instance.center);
+      })
+      setTimeout(time => {
+        new_instance.options.duration = 200;
+      }, 200)
+    })
   }
 }

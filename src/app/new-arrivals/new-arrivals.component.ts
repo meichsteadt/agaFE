@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import 'jquery'
-import * as carousel from 'bootstrap/js/carousel.js';
-declare var ahoy: any;
+
 declare var $: any;
+declare var M: any;
 
 @Component({
   selector: 'app-new-arrivals',
@@ -17,10 +16,12 @@ export class NewArrivalsComponent implements OnInit {
   user: string;
   category: string;
   subCategories = [];
-  pagenumber: number = 1;
+  pagenumber: number = 0;
   pages: number;
   startingPosition: number = 0;
   products = [];
+  timesLooped: number = 0;
+  displayed: Number[] = [0,1,2];
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private auth: AuthService) { }
@@ -54,6 +55,12 @@ export class NewArrivalsComponent implements OnInit {
         this.products.push([])
         this.productService.getNewArrivals(this.user, i + 1).subscribe(res => {
           this.products[parseInt(res["page_number"]) - 1] = res["products"];
+          if(this.timesLooped === this.pages - 1) {
+            this.initCarousel();
+          }
+          else {
+            this.timesLooped++;
+          }
         })
       }
     });
@@ -61,13 +68,11 @@ export class NewArrivalsComponent implements OnInit {
 
   setPage(pagenumber){
     this.pagenumber = pagenumber;
-    if (this.user !== "1") {
-      ahoy.trackView();
-    }
     localStorage.setItem("pageNumber", this.pagenumber + "");
   }
 
   nextPage() {
+    $('.carousel').carousel('next')
     if (this.pagenumber == this.pages) {
       this.setPage(1);
     }
@@ -77,6 +82,7 @@ export class NewArrivalsComponent implements OnInit {
   }
 
   previousPage() {
+    $('.carousel').carousel('prev')
     if (this.pagenumber == 1) {
       this.setPage(this.pages);
     }
@@ -108,31 +114,47 @@ export class NewArrivalsComponent implements OnInit {
     }
   }
 
-  swipe(e: TouchEvent, when: string): void {
-    const coord: [number, number] = [e.changedTouches[0].pageX, e.changedTouches[0].pageY];
-    const time = new Date().getTime();
-
-    if (when === 'start') {
-      this.swipeCoord = coord;
-      this.swipeTime = time;
-    }
-
-    else if (when === 'end') {
-      const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
-      const duration = time - this.swipeTime;
-
-      if (duration < 1000 && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) {
-        const swipe = direction[0] < 0 ? 'next' : 'previous';
-        if(swipe === "next") {
-          this.nextPage();
-          $('#myCarousel').carousel('next');
-        }
-        else {
-          this.previousPage();
-          $('#myCarousel').carousel('prev');
-        }
+  shouldDisplay(i) {
+    if(
+      i === this.pagenumber ||
+      i === this.pagenumber + 1 ||
+      i === this.pagenumber + 2 ||
+      this.displayed.includes(i) ||
+      i === (this.pages + this.pagenumber) ||
+      i === (this.pages + this.pagenumber - 1)
+    ) {
+      if(!this.displayed.includes(i)) {
+        this.displayed.push(i);
       }
+      return true;
     }
+    else {
+      return false
+    }
+  }
+
+  initCarousel() {
+    $(document).ready(doc => {
+      $('.carousel-inner').remove()
+      $('.indicators').remove()
+      var instance = M.Carousel.getInstance(document.querySelector('.carousel'));
+      if(instance) {
+        instance.destroy();
+      }
+      var elem = document.querySelector('.carousel');
+      var new_instance = M.Carousel.init(elem, {
+        indicators: true,
+        fullWidth: true,
+        duration: 0
+      })
+      new_instance.set(this.startingPosition)
+      new_instance.options.onCycleTo = (i => {
+        this.setPage(new_instance.center);
+      })
+      setTimeout(time => {
+        new_instance.options.duration = 200;
+      }, 200)
+    })
   }
 
   getSubCategoryThumbnails(category) {

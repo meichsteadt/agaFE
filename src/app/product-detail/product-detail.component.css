@@ -15,7 +15,9 @@
 }
 
 .product-info p {
-  font-size: 1.6em;
+  font-size: 1.6rem;
+  max-height: calc(46vw - 200px);
+  overflow: scroll;
 }
 
 table {
@@ -86,12 +88,12 @@ td {
   padding-left: 0;
 }
 
-.input-field .glyphicon.glyphicon-triangle-bottom {
+.input-field i {
   position: absolute;
   right: 10px;
   top: auto;
-  bottom: 15px;
-  height: 10px;
+  bottom: 22px;
+  z-index: 0;
 }
 
 #email-form {
@@ -99,11 +101,13 @@ td {
 }
 
 #email-form .input-field {
-  position: relative;
+
 }
 
 #email-form input{
   min-width: 300px;
+  width: calc(60% - 90px);
+  margin: 0 auto;
   height: 50px;
   border: none;
   border-bottom: 1px solid #000;
@@ -133,32 +137,12 @@ td {
   width: auto;
 }
 
-
-
-.arrow-wrapper-right, .arrow-wrapper-left {
-  position: fixed;
-  color: #000;
-  z-index: 2;
-  font-size: 90px;
-  top: 50%;
-  transform: translateY(-50%);
+.modal {
+  height: 98vh;
+  width: 80vw;
+  max-height: none;
 }
 
-.arrow-wrapper-left {
-  left: 0;
-}
-
-.arrow-wrapper-right {
-  right: 0;
-}
-
-.glyphicon-chevron-left, .glyphicon-chevron-right {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 100%;
-  border: 5px solid #000;
-}
-
-.product-details {
-  display: none;
+.modal-content {
+  height: 100%;
 }
