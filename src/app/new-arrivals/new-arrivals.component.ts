@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import 'ahoy.js';
-declare var ahoy: any;
 
 @Component({
   selector: 'app-new-arrivals',

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import 'ahoy.js';
-declare var ahoy: any;
 
 @Component({
   selector: 'app-sub-categories',
@@ -27,7 +25,6 @@ export class SubCategoriesComponent implements OnInit {
       this.category = urlParameters['category'];
     });
     this.getSubCategories();
-    ahoy.trackView();
   }
 
   linkize(string) {
@@ -55,7 +52,6 @@ export class SubCategoriesComponent implements OnInit {
         this.subCategories.push([])
         this.productService.getSubCategories(this.category, i + 1).subscribe(res => {
           this.subCategories[parseInt(res["page_number"]) - 1] = res["sub_categories"];
-          console.log(this.subCategories)
         })
       }
     });

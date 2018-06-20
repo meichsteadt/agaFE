@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../user.service';
-import 'ahoy.js';
-declare var ahoy: any;
 
 @Component({
   selector: 'app-categories',
@@ -30,7 +28,6 @@ export class CategoriesComponent implements OnInit {
       this.seating = "assets/8327TL.jpg"
       this.youth = "assets/B1799-1.jpg"
       this.newArrivals = "assets/1834.jpg"
-      ahoy.trackView();
   }
 
   compare(n) {

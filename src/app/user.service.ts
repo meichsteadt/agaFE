@@ -16,7 +16,20 @@ export class UserService {
 
   update(user) {
     document.getElementById("info").innerHTML = ""
-    this.http.put(this.url() + "/users/" + this.auth.getUser(), {"bedroom_mult": parseFloat(user.bedroomMult), "dining_mult": parseFloat(user.diningMult), "seating_mult": parseFloat(user.seatingMult), "occasional_mult": parseFloat(user.occasionalMult), "youth_mult": parseFloat(user.youthMult), "home_mult": parseFloat(user.homeMult)}, {headers: this.headers}).subscribe(i => console.log(i))
+    this.http.put(this.url() + "/users/" + this.auth.getUser(), {
+      "bedroom_mult": parseFloat(user.bedroomMult),
+      "dining_mult": parseFloat(user.diningMult),
+      "seating_mult": parseFloat(user.seatingMult),
+      "occasional_mult": parseFloat(user.occasionalMult),
+      "youth_mult": parseFloat(user.youthMult),
+      "home_mult": parseFloat(user.homeMult),
+      "show_sku": user.showSku,
+      "show_prices": user.showPrices
+    }, {headers: this.headers}).subscribe(i => console.log(i))
+  }
+
+  getShowSettings(id) {
+    return this.http.get(this.url() + `/users/${id}/show_sku`)
   }
 
   url() {

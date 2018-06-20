@@ -23,16 +23,17 @@ table {
   width: 100%;
 }
 table th {
-  width: 20%;
   font-size: 20px;
   font-weight: bold;
   text-align: left;
+  width: 16%;
 }
 
 td {
-  width: 20%;
   text-align: left;
   font-size: 16px;
+  width: 16%;
+  padding: 10px;
 }
 
 #total {
@@ -90,7 +91,7 @@ td {
   position: absolute;
   right: 10px;
   top: auto;
-  bottom: 15px;
+  bottom: 30px;
   height: 10px;
 }
 

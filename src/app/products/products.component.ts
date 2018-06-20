@@ -5,8 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
-import 'ahoy.js';
-declare var ahoy: any;
 
 @Component({
   selector: 'app-products',
@@ -31,7 +29,7 @@ export class ProductsComponent implements OnInit {
     this.closeModal();
     this.category = this.router.url.split('/').pop();
     this.user = this.userService.getUser();
-    ahoy.trackView();
+
     this.route.params.subscribe(params => {
       if(params['search']) {
         this.searchParams = params['search']
@@ -120,9 +118,6 @@ export class ProductsComponent implements OnInit {
 
   setPage(number) {
     this.pageNumber = number;
-    if (this.user !== "1") {
-      ahoy.trackView();
-    }
     localStorage.setItem("pageNumber", this.pageNumber + "");
   }
 

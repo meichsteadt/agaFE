@@ -5,8 +5,7 @@ import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProductService } from './product.service';
 import { UserService } from './user.service';
-import 'ahoy.js';
-declare var ahoy: any;
+
 
 @Component({
   selector: 'app-root',
@@ -29,18 +28,6 @@ export class AppComponent {
     }
     localStorage.removeItem("pageNumber")
 
-    ahoy.reset();
-    ahoy.configure({
-      urlPrefix: this.productService.url(),
-      visitsUrl: "/ahoy/visits",
-      eventsUrl: "/ahoy/events",
-      cookieDomain: null,
-      page: null,
-      platform: "Web",
-      useBeacon: false,
-      startOnReady: true
-    });
-    this.http.post(this.productService.url() + "/ahoy/visits", {});
     if (this.auth.getUser() === "1") {
       setInterval(i => {
         this.checkTime();

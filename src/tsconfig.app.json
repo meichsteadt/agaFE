@@ -4,9 +4,7 @@
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
     "module": "es2015",
-    "types": [
-      "ahoy.js"
-    ]
+    "types": []
   },
   "exclude": [
     "test.ts",

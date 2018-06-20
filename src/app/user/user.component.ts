@@ -19,7 +19,19 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getUser().subscribe(i => {
-      this.user = new User(i["user"]["id"], i["user"]["bedroom_mult"], i["user"]["dining_mult"], i["user"]["seating_mult"], i["user"]["youth_mult"], i["user"]["occasional_mult"], i["user"]["home_mult"]);
+      this.user = new User(
+        i["user"]["id"],
+        i["user"]["bedroom_mult"],
+        i["user"]["dining_mult"],
+        i["user"]["seating_mult"],
+        i["user"]["youth_mult"],
+        i["user"]["occasional_mult"],
+        i["user"]["home_mult"],
+        i["user"]["show_sku"],
+        i["user"]["show_prices"],
+        i["user"]["round"],
+        i["user"]["sort_by"]
+      );
       this.emails = i["emails"];
     }, error => this.handleError());
   }
@@ -31,6 +43,6 @@ export class UserComponent implements OnInit {
   update(user) {
     document.getElementById("info").innerHTML = ""
     this.userService.update(user);
-    document.getElementById("info").innerHTML = "Multipliers updated successfully."
+    document.getElementById("info").innerHTML = "Settings updated successfully."
   }
 }

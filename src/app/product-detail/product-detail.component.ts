@@ -6,13 +6,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
-import 'ahoy.js';
-declare var ahoy: any;
+import { UserService } from '../user.service';
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
-  providers: [ProductService]
+  providers: [ProductService, UserService]
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
@@ -23,17 +23,22 @@ export class ProductDetailComponent implements OnInit {
   images: String[] = [];
   currentImage: number = 0;
   user: string;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService, private productService: ProductService) { }
+  showSku: boolean = true;
+  showPrices: boolean = true;
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService, private productService: ProductService, private userService: UserService) { }
 
   ngOnInit() {
     let user = this.auth.getUser();
     this.user = user;
+    this.userService.getShowSettings(user).subscribe((response: boolean) => {
+      this.showSku = response["show_sku"];
+      this.showPrices = response["show_prices"];
+    });
     this.route.params.subscribe((urlParameters) => {
       this.productId = parseInt(urlParameters['id']);
       this.getProduct(user);
     });
     this.setTotal();
-    ahoy.trackView();
   }
 
   getProduct(user) {
