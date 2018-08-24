@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   images: String[] = [];
   currentImage: number = 0;
   user: string;
-  showSku: boolean = true;
+  showSku: boolean = false;
   showPrices: boolean = true;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService, private productService: ProductService, private userService: UserService) { }
 
