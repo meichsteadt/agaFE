@@ -8,6 +8,8 @@ import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -25,6 +27,8 @@ export class ProductDetailComponent implements OnInit {
   user: string;
   showSku: boolean = false;
   showPrices: boolean = true;
+  bodyWidth: number;
+  thWidth: number;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private auth: AuthService, private productService: ProductService, private userService: UserService) { }
 
   ngOnInit() {
@@ -39,15 +43,27 @@ export class ProductDetailComponent implements OnInit {
       this.getProduct(user);
     });
     this.setTotal();
+
+    this.bodyWidth = Math.round($('body').width());
+    this.thWidth = Math.round($('.product-image-wrapper').width());
   }
 
   getProduct(user) {
     this.productItems = [];
     this.productService.getProduct(this.productId, this.user).subscribe(i =>
       {
-        this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], i["product"]["images"][0]);
+        let thumbnail = i["product"]["images"][0];
+        if(thumbnail && thumbnail.match("500x500")) {
+          thumbnail = thumbnail.replace("500x500", this.thWidth + "x" + this.thWidth)
+        }
+        this.product = new Product(i["product"]["id"], i["product"]["category"], i["product"]["description"], i["product"]["name"], i["product"]["number"], thumbnail);
         for(var j = 0; j < i["product"]["images"].length; j ++) {
-          this.images.push(i["product"]["images"][j])
+          if(i["product"]["images"][j].match("500x500")) {
+            this.images.push(i["product"]["images"][j].replace("500x500", this.bodyWidth + "x" + this.bodyWidth))
+          }
+          else {
+            this.images.push(i["product"]["images"][j])
+          }
         }
         i["product_items"].forEach(item => {
           let productItem = new ProductItem(item["description"], item["dimensions"], item["id"], item["number"], item["price"], 0, item["can_sell"])
@@ -96,8 +112,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   next() {
-    if(this.productId !== 4272) {
-      this.router.navigateByUrl('products/' + (this.productId + 1))
+    if(this.productId < 4785) {
+      this.router.navigateByUrl('products/' + (this.productId + 1) + "?user=19")
     }
   }
 
@@ -120,6 +136,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   catchError(error) {
-    this.auth.resetToken();
+    this.next();
+    // this.auth.resetToken();
   }
 }

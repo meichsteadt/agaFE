@@ -1,3 +1,9 @@
+<div class="arrow-wrapper-left" data-slide="prev" data-target="#myCarousel" (click)="previousPage()">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+</div>
+<div class="arrow-wrapper-right" data-slide="next" data-target="#myCarousel" (click)="nextPage()">
+  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+</div>
 <div id="myCarousel" class="carousel slide products" data-ride="carousel" data-interval="false">
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
@@ -5,7 +11,7 @@
       <div class="products clearfix">
         <div class="product col-xs-4" *ngFor="let product of page" (click)="goToDetail(product)">
           <div class="image-wrapper">
-            <img *ngIf="product['thumbnail']" src="{{product['thumbnail']}}" alt="" class="product-image">
+            <img *ngIf="product['images'].length > 0" src="{{product['images'][0]}}" alt="" class="product-image">
             <div class="info">
               <p>{{product["name"]}}</p>
             </div>
